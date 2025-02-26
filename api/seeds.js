@@ -4,6 +4,7 @@ const User = require('./models/userModel');
 const admin = {
   name: 'admin',
   email: process.env.ADMIN_EMAIL,
+  phone: '0945915868',
   password: process.env.ADMIN_PASSWORD,
   role: 'ADMIN',
 };

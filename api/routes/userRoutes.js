@@ -37,7 +37,7 @@ router
   .get(
     authMiddlewers.protect,
     authMiddlewers.isactive,
-    authMiddlewers.restrictTo('ADMIN'),
+    authMiddlewers.restrictTo('ADMIN', 'EMP'),
     userController.getAllUsers,
   )
   .post(

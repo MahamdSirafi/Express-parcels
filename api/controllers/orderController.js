@@ -1,0 +1,9 @@
+const Order = require('../models/orderModel');
+const AppError = require('../utils/appError');
+const handlerFactory = require('../utils/handlerFactory');
+const catchAsync = require('../utils/catchAsync');
+exports.getOrder = handlerFactory.getOne(Order);
+exports.createOrder = handlerFactory.createOne(Order);
+exports.updateOrder = handlerFactory.updateOne(Order);
+exports.deleteOrder = handlerFactory.deleteOne(Order);
+exports.getAllOrder = handlerFactory.getAll(Order);

@@ -1,0 +1,9 @@
+const ServiceCenters = require('../models/serviceCentersModel');
+const AppError = require('../utils/appError');
+const handlerFactory = require('../utils/handlerFactory');
+const catchAsync = require('../utils/catchAsync');
+exports.getServiceCenters = handlerFactory.getOne(ServiceCenters);
+exports.createServiceCenters = handlerFactory.createOne(ServiceCenters);
+exports.updateServiceCenters = handlerFactory.updateOne(ServiceCenters);
+exports.deleteServiceCenters = handlerFactory.deleteOne(ServiceCenters);
+exports.getAllServiceCenters = handlerFactory.getAll(ServiceCenters);
