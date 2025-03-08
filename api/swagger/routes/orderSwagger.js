@@ -268,9 +268,9 @@ type: 'Clothing and fabrics',
 
 image_url: '',
 
-is_fragile: ture,
+is_fragile: true,
 
-weight: 15kg,
+weight: 15,
 
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',
@@ -338,9 +338,9 @@ type: 'Clothing and fabrics',
 
 image_url: '',
 
-is_fragile: ture,
+is_fragile: true,
 
-weight: 15kg,
+weight: 15,
 
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',
@@ -431,9 +431,9 @@ type: 'Clothing and fabrics',
 
 image_url: '',
 
-is_fragile: ture,
+is_fragile : true,
 
-weight: 15kg,
+weight: 15,
 
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',
