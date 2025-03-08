@@ -350,9 +350,6 @@ exports.createServiceCenters = {
     },
 
     name: 'aleppo',
-
-    createdAt: '2024-11-24T16:35:04.438Z',
-    updatedAt: '2024-11-24T16:35:04.438Z',
   },
   required: [
     // required property
@@ -440,8 +437,5 @@ exports.updateServiceCenters = {
     },
 
     name: 'aleppo',
-
-    createdAt: '2024-11-24T16:35:04.438Z',
-    updatedAt: '2024-11-24T16:35:04.438Z',
   },
 };
