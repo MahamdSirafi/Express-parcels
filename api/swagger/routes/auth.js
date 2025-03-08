@@ -248,11 +248,12 @@ exports.signUp = {
 
     name: { type: 'string' },
     email: { type: 'string' },
+    phone: { type: 'string' },
     password: { type: 'string' },
   },
   example: {
     // create property example
-
+    phone: '0945915868',
     name: 'Adel Seirafi',
     email: 'user@gmail.com',
     password: '123454321',
