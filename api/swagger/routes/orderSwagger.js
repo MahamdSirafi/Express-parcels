@@ -222,23 +222,24 @@ exports.Order = {
   properties: {
     id: { type: 'string' },
     // property
-confirmed: { type: 'boolean',},
-order_status: { type: 'string',},
-payment_method: { type: 'string',},
-tolal_price: { type: 'number',},
+    destination_location: { type: 'string' },
+    confirmed: { type: 'boolean' },
+    order_status: { type: 'string' },
+    payment_method: { type: 'string' },
+    tolal_price: { type: 'number' },
     item: {
       type: 'array',
       items: {
         type: 'object',
         properties: {
           //  properties item
-type: { type: 'string',},
+          type: { type: 'string' },
 
-image_url: { type: 'string',},
+          image_url: { type: 'string' },
 
-is_fragile: { type: 'boolean',},
+          is_fragile: { type: 'boolean' },
 
-weight: { type: 'number',},
+          weight: { type: 'number' },
 
           description: { type: 'string' },
 
@@ -253,24 +254,26 @@ weight: { type: 'number',},
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
-confirmed: 1,
+    destination_locationId: '673c40cd59e293827f79e398',
 
-order_status: 'Successfully completed',
+    confirmed: 1,
 
-payment_method: 'Bank payment',
+    order_status: 'Successfully completed',
 
-tolal_price: 299,
+    payment_method: 'Bank payment',
+
+    tolal_price: 299,
 
     item: [
       {
         // property example item
-type: 'Clothing and fabrics',
+        type: 'Clothing and fabrics',
 
-image_url: '',
+        image_url: '',
 
-is_fragile: true,
+        is_fragile: true,
 
-weight: 15,
+        weight: 15,
 
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',
@@ -293,23 +296,24 @@ exports.createOrder = {
   type: 'object',
   properties: {
     // create property
-confirmed: { type: 'boolean',},
-order_status: { type: 'string',},
-payment_method: { type: 'string',},
-tolal_price: { type: 'number',},
+    destination_location: { type: 'string' },
+    confirmed: { type: 'boolean' },
+    order_status: { type: 'string' },
+    payment_method: { type: 'string' },
+    tolal_price: { type: 'number' },
     item: {
       type: 'array',
       items: {
         type: 'object',
         properties: {
           //  create  properties item
-type: { type: 'string',},
+          type: { type: 'string' },
 
-image_url: { type: 'string',},
+          image_url: { type: 'string' },
 
-is_fragile: { type: 'boolean',},
+          is_fragile: { type: 'boolean' },
 
-weight: { type: 'number',},
+          weight: { type: 'number' },
 
           description: { type: 'string' },
 
@@ -323,24 +327,26 @@ weight: { type: 'number',},
   },
   example: {
     // create property example
-confirmed: 1,
+    destination_locationId: '673c40cd59e293827f79e398',
 
-order_status: 'Successfully completed',
+    confirmed: 1,
 
-payment_method: 'Bank payment',
+    order_status: 'Successfully completed',
 
-tolal_price: 299,
+    payment_method: 'Bank payment',
+
+    tolal_price: 299,
 
     item: [
       {
         // create property example item
-type: 'Clothing and fabrics',
+        type: 'Clothing and fabrics',
 
-image_url: '',
+        image_url: '',
 
-is_fragile: true,
+        is_fragile: true,
 
-weight: 15,
+        weight: 15,
 
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',
@@ -358,20 +364,21 @@ weight: 15,
   },
   required: [
     // required property
-'confirmed', 
+    'destination_location',
 
-'order_status', 
+    'confirmed',
 
-'payment_method', 
+    'order_status',
 
+    'payment_method',
 
-'item.type', 
+    'item.type',
 
-'item.image_url', 
+    'item.image_url',
 
-'item.is_fragile', 
+    'item.is_fragile',
 
-'item.weight', 
+    'item.weight',
 
     'item.description',
 
@@ -386,23 +393,24 @@ exports.updateOrder = {
   type: 'object',
   properties: {
     // update property
-confirmed: { type: 'boolean',},
-order_status: { type: 'string',},
-payment_method: { type: 'string',},
-tolal_price: { type: 'number',},
+    destination_location: { type: 'string' },
+    confirmed: { type: 'boolean' },
+    order_status: { type: 'string' },
+    payment_method: { type: 'string' },
+    tolal_price: { type: 'number' },
     item: {
       type: 'array',
       items: {
         type: 'object',
         properties: {
           //  update properties item
-type: { type: 'string',},
+          type: { type: 'string' },
 
-image_url: { type: 'string',},
+          image_url: { type: 'string' },
 
-is_fragile: { type: 'boolean',},
+          is_fragile: { type: 'boolean' },
 
-weight: { type: 'number',},
+          weight: { type: 'number' },
 
           description: { type: 'string' },
 
@@ -416,24 +424,26 @@ weight: { type: 'number',},
   },
   example: {
     // update property example
-confirmed: 1,
+    destination_locationId: '673c40cd59e293827f79e398',
 
-order_status: 'Successfully completed',
+    confirmed: 1,
 
-payment_method: 'Bank payment',
+    order_status: 'Successfully completed',
 
-tolal_price: 299,
+    payment_method: 'Bank payment',
+
+    tolal_price: 299,
 
     item: [
       {
         // update property example item
-type: 'Clothing and fabrics',
+        type: 'Clothing and fabrics',
 
-image_url: '',
+        image_url: '',
 
-is_fragile : true,
+        is_fragile: true,
 
-weight: 15,
+        weight: 15,
 
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',

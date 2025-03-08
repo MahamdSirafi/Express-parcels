@@ -253,6 +253,7 @@ exports.signUp = {
   },
   example: {
     // create property example
+
     phone: '0945915868',
     name: 'Adel Seirafi',
     email: 'user@gmail.com',

@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
+    destination_locationId: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Servicecenters',
+      required: [true, 'Please enter name  destination_location'],
+    },
     confirmed: {
       type: Boolean,
       required: [true, 'Please enter name  confirmed'],
@@ -61,6 +66,13 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false },
 );
 // <creating-function-schema />
+orderSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'destination_locationId',
+    select: '-_id',
+  });
+  next();
+});
 
 orderSchema.pre(/^find/, function (next) {
   this.populate({
