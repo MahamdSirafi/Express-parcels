@@ -47,9 +47,6 @@ const orderSchema = new mongoose.Schema(
         },
       },
     ],
-    name: {
-      type: String,
-    },
     source_lactionId: {
       type: mongoose.Schema.ObjectId,
       ref: 'ServiceConters',
