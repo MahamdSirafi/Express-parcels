@@ -16,9 +16,14 @@ router
 router
   .route('/')
   .get(restrictTo(ADMIN, EMP), orderController.getAllOrder)
-  .post(restrictTo(EMP),(req,res,next)=>{req.body.source_lactionId=req.user.centerId;
-    next()
-  }, orderController.createOrder);
+  .post(
+    restrictTo(EMP),
+    (req, res, next) => {
+      req.body.source_lactionId = req.user.centerId;
+      next();
+    },
+    orderController.createOrder,
+  );
 router
   .route('/:id')
   .get(restrictTo(ADMIN, EMP), orderController.getOrder)

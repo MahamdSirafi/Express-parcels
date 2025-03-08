@@ -222,6 +222,8 @@ exports.ServiceCenters = {
   properties: {
     id: { type: 'string' },
     // property
+    services_offered: { type: 'array', items: { type: 'string' } },
+    special_instructions: { type: 'string' },
     operating_hours: {
       type: 'array',
       items: {
@@ -253,6 +255,10 @@ exports.ServiceCenters = {
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
+    services_offered: ['For express shipping, home delivery, packaging'],
+
+    special_instructions: 'Please enter your ID when receiving your shipment',
+
     operating_hours: [
       {
         // property example operating_hours
@@ -285,6 +291,8 @@ exports.createServiceCenters = {
   type: 'object',
   properties: {
     // create property
+    services_offered: { type: 'array', items: { type: 'string' } },
+    special_instructions: { type: 'string' },
     operating_hours: {
       type: 'array',
       items: {
@@ -315,6 +323,10 @@ exports.createServiceCenters = {
   },
   example: {
     // create property example
+    services_offered: ['For express shipping, home delivery, packaging'],
+
+    special_instructions: 'Please enter your ID when receiving your shipment',
+
     operating_hours: [
       {
         // create property example operating_hours
@@ -344,6 +356,10 @@ exports.createServiceCenters = {
   },
   required: [
     // required property
+    'services_offered',
+
+    'special_instructions',
+
     'operating_hours.end',
 
     'operating_hours.start',
@@ -365,6 +381,8 @@ exports.updateServiceCenters = {
   type: 'object',
   properties: {
     // update property
+    services_offered: { type: 'array', items: { type: 'string' } },
+    special_instructions: { type: 'string' },
     operating_hours: {
       type: 'array',
       items: {
@@ -395,6 +413,10 @@ exports.updateServiceCenters = {
   },
   example: {
     // update property example
+    services_offered: ['For express shipping, home delivery, packaging'],
+
+    special_instructions: 'Please enter your ID when receiving your shipment',
+
     operating_hours: [
       {
         // update property example operating_hours

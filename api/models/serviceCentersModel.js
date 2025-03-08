@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const serviceCentersSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
+    services_offered: [
+      {
+        type: String,
+        required: [true, 'Please enter name  services_offered'],
+      },
+    ],
+    special_instructions: {
+      type: String,
+      required: [true, 'Please enter name  special_instructions'],
+    },
     operating_hours: [
       {
         // <creating-property-object-operating_hours />

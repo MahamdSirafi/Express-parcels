@@ -222,12 +222,65 @@ exports.Order = {
   properties: {
     id: { type: 'string' },
     // property
+confirmed: { type: 'boolean',},
+order_status: { type: 'string',},
+payment_method: { type: 'string',},
+tolal_price: { type: 'number',},
+    item: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          //  properties item
+type: { type: 'string',},
+
+image_url: { type: 'string',},
+
+is_fragile: { type: 'boolean',},
+
+weight: { type: 'number',},
+
+          description: { type: 'string' },
+
+          item_name: { type: 'string' },
+        },
+      },
+    },
+    name: { type: 'string' },
     source_laction: { type: 'string' },
     user: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
+confirmed: 1,
+
+order_status: 'Successfully completed',
+
+payment_method: 'Bank payment',
+
+tolal_price: 299,
+
+    item: [
+      {
+        // property example item
+type: 'Clothing and fabrics',
+
+image_url: '',
+
+is_fragile: ture,
+
+weight: 15kg,
+
+        description:
+          'Legal papers are legal documents that prove rights and obligations such as a passport.',
+
+        item_name: 'Legal papers',
+      },
+    ],
+
+    name: '&#34;Standard Delivery&#34;',
+
     source_lactionId: '673c40cd59e293827f79e398',
 
     userId: '673c40cd59e293827f79e398',
@@ -240,11 +293,63 @@ exports.createOrder = {
   type: 'object',
   properties: {
     // create property
+confirmed: { type: 'boolean',},
+order_status: { type: 'string',},
+payment_method: { type: 'string',},
+tolal_price: { type: 'number',},
+    item: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          //  create  properties item
+type: { type: 'string',},
+
+image_url: { type: 'string',},
+
+is_fragile: { type: 'boolean',},
+
+weight: { type: 'number',},
+
+          description: { type: 'string' },
+
+          item_name: { type: 'string' },
+        },
+      },
+    },
+    name: { type: 'string' },
 
     user: { type: 'string' },
   },
   example: {
     // create property example
+confirmed: 1,
+
+order_status: 'Successfully completed',
+
+payment_method: 'Bank payment',
+
+tolal_price: 299,
+
+    item: [
+      {
+        // create property example item
+type: 'Clothing and fabrics',
+
+image_url: '',
+
+is_fragile: ture,
+
+weight: 15kg,
+
+        description:
+          'Legal papers are legal documents that prove rights and obligations such as a passport.',
+
+        item_name: 'Legal papers',
+      },
+    ],
+
+    name: '&#34;Standard Delivery&#34;',
 
     userId: '673c40cd59e293827f79e398',
 
@@ -253,6 +358,25 @@ exports.createOrder = {
   },
   required: [
     // required property
+'confirmed', 
+
+'order_status', 
+
+'payment_method', 
+
+
+'item.type', 
+
+'item.image_url', 
+
+'item.is_fragile', 
+
+'item.weight', 
+
+    'item.description',
+
+    'item.item_name',
+
     'source_laction',
 
     'user',
@@ -262,11 +386,63 @@ exports.updateOrder = {
   type: 'object',
   properties: {
     // update property
+confirmed: { type: 'boolean',},
+order_status: { type: 'string',},
+payment_method: { type: 'string',},
+tolal_price: { type: 'number',},
+    item: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          //  update properties item
+type: { type: 'string',},
+
+image_url: { type: 'string',},
+
+is_fragile: { type: 'boolean',},
+
+weight: { type: 'number',},
+
+          description: { type: 'string' },
+
+          item_name: { type: 'string' },
+        },
+      },
+    },
+    name: { type: 'string' },
 
     user: { type: 'string' },
   },
   example: {
     // update property example
+confirmed: 1,
+
+order_status: 'Successfully completed',
+
+payment_method: 'Bank payment',
+
+tolal_price: 299,
+
+    item: [
+      {
+        // update property example item
+type: 'Clothing and fabrics',
+
+image_url: '',
+
+is_fragile: ture,
+
+weight: 15kg,
+
+        description:
+          'Legal papers are legal documents that prove rights and obligations such as a passport.',
+
+        item_name: 'Legal papers',
+      },
+    ],
+
+    name: '&#34;Standard Delivery&#34;',
 
     userId: '673c40cd59e293827f79e398',
 
