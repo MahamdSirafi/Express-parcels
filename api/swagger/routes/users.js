@@ -241,54 +241,6 @@
 
 /**
  * @swagger
- * /users/activeMe:
- *   patch:
- *     summary: active
- *     description: active your account.
- *     tags: [Users]
- *     security:
- *       - Bearer: []
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: success
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- */
-
-/**
- * @swagger
- * /users/deleteMe:
- *   delete:
- *     summary: unactive your account
- *     description: Logged in users can delete only themselves.
- *     tags: [Users]
- *     security:
- *       - Bearer: []
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: success
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- */
-
-/**
- * @swagger
  * /users/updateMe:
  *   patch:
  *     summary: Update yor account
@@ -368,7 +320,6 @@ exports.User = {
   properties: {
     id: { type: 'string' },
     // property
-
     phone: { type: 'string' },
     email: { type: 'string', format: 'email' },
     name: { type: 'string' },
@@ -381,7 +332,6 @@ exports.User = {
     // property example
 
     phone: '0977786725',
-
     email: 'user@gmail.com',
     name: 'adel seirafi',
     role: 'USER',
@@ -394,6 +344,7 @@ exports.createUser = {
   properties: {
     // create property
 
+    centerId: { type: 'string' },
     name: { type: 'string' },
     email: { type: 'string' },
     password: { type: 'string' },
@@ -402,12 +353,13 @@ exports.createUser = {
   },
   example: {
     // create property example
-
+    centerIdL: "5ebac534954b54139806c112",
     name: 'Mohammed Seirafi',
     email: 'adel@gmail.com',
     password: '123454321',
     photo: './public/img/users/dafult.jpg',
-    role: 'USER',
+    phone: '086464646464',
+    role: 'EMP',
   },
 };
 

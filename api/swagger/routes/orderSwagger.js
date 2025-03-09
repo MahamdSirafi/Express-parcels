@@ -5,6 +5,38 @@
  *   description: Order management and retrieval
  */
 
+
+
+/**
+ * @swagger
+ * /orders/mine:
+ *   get:
+ *     summary: Get mine orders
+ *     description: USER can retrieve all orders.
+ *     tags: [Orders]
+ *     security:
+ *       - Bearer: []
+ *     responses:
+ *       "200":
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: success
+ *                 doc:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Order'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "403":
+ *         $ref: '#/components/responses/Forbidden'
+ */
+
 /**
  * @swagger
  * /orders:
@@ -222,17 +254,25 @@ exports.Order = {
   properties: {
     id: { type: 'string' },
     // property
+<<<<<<< HEAD
     destination_location: { type: 'string' },
     confirmed: { type: 'boolean' },
     order_status: { type: 'string' },
     payment_method: { type: 'string' },
     tolal_price: { type: 'number' },
+=======
+    confirmed: { type: 'boolean', },
+    order_status: { type: 'string', },
+    payment_method: { type: 'string', },
+    tolal_price: { type: 'number', },
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
     item: {
       type: 'array',
       items: {
         type: 'object',
         properties: {
           //  properties item
+<<<<<<< HEAD
           type: { type: 'string' },
 
           image_url: { type: 'string' },
@@ -241,19 +281,25 @@ exports.Order = {
 
           weight: { type: 'number' },
 
+=======
+          type: { type: 'string', },
+          image_url: { type: 'string', },
+          is_fragile: { type: 'boolean', },
+          weight: { type: 'number', },
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
           description: { type: 'string' },
-
           item_name: { type: 'string' },
         },
       },
     },
     name: { type: 'string' },
     source_laction: { type: 'string' },
-    user: { type: 'string' },
+    userId: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
+<<<<<<< HEAD
     destination_locationId: '673c40cd59e293827f79e398',
 
     confirmed: 1,
@@ -264,10 +310,17 @@ exports.Order = {
 
     tolal_price: 299,
 
+=======
+    confirmed: true,
+    order_status: 'Successfully completed',
+    payment_method: 'Bank payment',
+    tolal_price: 299,
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
     item: [
       {
         // property example item
         type: 'Clothing and fabrics',
+<<<<<<< HEAD
 
         image_url: '',
 
@@ -275,19 +328,19 @@ exports.Order = {
 
         weight: 15,
 
+=======
+        image_url: '/image/photo.jpg',
+        is_fragile: true,
+        weight: 15,
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',
-
         item_name: 'Legal papers',
       },
     ],
-
     name: '&#34;Standard Delivery&#34;',
-
     source_lactionId: '673c40cd59e293827f79e398',
-
     userId: '673c40cd59e293827f79e398',
-
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
   },
@@ -296,17 +349,24 @@ exports.createOrder = {
   type: 'object',
   properties: {
     // create property
+<<<<<<< HEAD
     destination_location: { type: 'string' },
     confirmed: { type: 'boolean' },
     order_status: { type: 'string' },
     payment_method: { type: 'string' },
     tolal_price: { type: 'number' },
+=======
+    confirmed: { type: 'boolean', },
+    order_status: { type: 'string', },
+    payment_method: { type: 'string', },
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
     item: {
       type: 'array',
       items: {
         type: 'object',
         properties: {
           //  create  properties item
+<<<<<<< HEAD
           type: { type: 'string' },
 
           image_url: { type: 'string' },
@@ -315,18 +375,22 @@ exports.createOrder = {
 
           weight: { type: 'number' },
 
+=======
+          type: { type: 'string', },
+          image_url: { type: 'string', },
+          is_fragile: { type: 'boolean', },
+          weight: { type: 'number', },
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
           description: { type: 'string' },
-
           item_name: { type: 'string' },
         },
       },
     },
-    name: { type: 'string' },
-
-    user: { type: 'string' },
+    userId: { type: 'string' },
   },
   example: {
     // create property example
+<<<<<<< HEAD
     destination_locationId: '673c40cd59e293827f79e398',
 
     confirmed: 1,
@@ -337,10 +401,16 @@ exports.createOrder = {
 
     tolal_price: 299,
 
+=======
+    confirmed: true,
+    order_status: 'Successfully completed',
+    payment_method: 'Bank payment',
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
     item: [
       {
         // create property example item
         type: 'Clothing and fabrics',
+<<<<<<< HEAD
 
         image_url: '',
 
@@ -348,22 +418,21 @@ exports.createOrder = {
 
         weight: 15,
 
+=======
+        image_url: '',
+        is_fragile: true,
+        weight: 15,
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
         description:
           'Legal papers are legal documents that prove rights and obligations such as a passport.',
-
         item_name: 'Legal papers',
       },
     ],
-
-    name: '&#34;Standard Delivery&#34;',
-
     userId: '673c40cd59e293827f79e398',
-
-    createdAt: '2024-11-24T16:35:04.438Z',
-    updatedAt: '2024-11-24T16:35:04.438Z',
   },
   required: [
     // required property
+<<<<<<< HEAD
     'destination_location',
 
     'confirmed',
@@ -380,19 +449,26 @@ exports.createOrder = {
 
     'item.weight',
 
+=======
+    'confirmed',
+    'order_status',
+    'payment_method',
+    'item.type',
+    'item.image_url',
+    'item.is_fragile',
+    'item.weight',
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
     'item.description',
-
     'item.item_name',
-
     'source_laction',
-
-    'user',
+    'userId',
   ],
 };
 exports.updateOrder = {
   type: 'object',
   properties: {
     // update property
+<<<<<<< HEAD
     destination_location: { type: 'string' },
     confirmed: { type: 'boolean' },
     order_status: { type: 'string' },
@@ -458,5 +534,12 @@ exports.updateOrder = {
 
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
+=======
+    confirmed: { type: 'boolean', },
+  },
+  example: {
+    // update property example
+    confirmed: true,
+>>>>>>> 1bf3277e11d33b15d5e17b45b3ef937affaa0bc2
   },
 };
