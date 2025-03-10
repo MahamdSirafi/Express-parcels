@@ -53,9 +53,14 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    address: {
+      type: String,
+      required: [true, 'Please provide your address'],
+    },
   },
   { versionKey: false },
 );
+// <creating-function-schema />
 
 userSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
