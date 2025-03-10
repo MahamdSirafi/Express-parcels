@@ -56,7 +56,6 @@ const userSchema = new mongoose.Schema(
   },
   { versionKey: false },
 );
-// <creating-function-schema />
 
 userSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified
