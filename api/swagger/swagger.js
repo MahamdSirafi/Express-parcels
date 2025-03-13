@@ -37,7 +37,7 @@ const options = {
       title: 'REST API Docs',
       version: '1.0.0',
       description:
-        'This is an API simpel Auth made with Express and documented with Swagger',
+        'This is a simple API for authentication made with Express and documented with Swagger',
     },
     servers: [
       {
@@ -70,7 +70,7 @@ const options = {
           type: 'http',
           scheme: 'bearer',
           bearerFormat: 'JWT',
-          description: 'Enter the token : abcde12345".',
+          description: 'Enter the token: abcde12345".',
         },
       },
       responses: {
@@ -79,16 +79,16 @@ const options = {
         NotFound,
         Unauthorized,
         201: {
-          description: 'created',
+          description: 'Created',
         },
         200: {
-          description: 'ok',
+          description: 'OK',
         },
         204: {
-          description: 'No content',
+          description: 'No Content',
         },
         400: {
-          description: 'Bad request',
+          description: 'Bad Request',
         },
         401: {
           description: 'Unauthorized',
@@ -97,15 +97,16 @@ const options = {
           description: 'Forbidden',
         },
         404: {
-          description: 'Not found',
+          description: 'Not Found',
         },
         500: {
-          description: 'Internal server error',
+          description: 'Internal Server Error',
         },
       },
     },
   },
   apis: ['./swagger/routes/*.js'],
 };
+
 const swaggerSpec = swaggerJsDoc(options);
 module.exports = swaggerSpec;
