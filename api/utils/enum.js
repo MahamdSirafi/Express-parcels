@@ -1,3 +1,12 @@
+exports.status = {
+  Received: 'Received',
+};
+
+exports.payment_method = {
+  cash: 'cash',
+  Bank: 'Bank',
+};
+
 exports.UserStatus = {
   active: 'active',
   disactive: 'disactive',
@@ -13,3 +22,15 @@ exports.Env = {
   test: 'test',
 };
 // <creating-enum-type />
+exports.statusParcel = {
+  Received:'Received',
+  Inprocess:'Inprocess',
+  Processed:'Processed',
+  InTransit: 'In Transit',
+  Inwarehouse : 'Inwarehouse',
+  Intransportation : 'Intransportation',
+  Return : 'Return',
+  Canceled : 'Canceled',
+  Missing :'Missing ',
+  Damaged : 'Damaged'
+};

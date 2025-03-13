@@ -1,49 +1,17 @@
 /**
  * @swagger
  * tags:
- *   name: Orders
- *   description: Order management and retrieval
- */
-
-
-
-/**
- * @swagger
- * /orders/mine:
- *   get:
- *     summary: Get mine orders
- *     description: USER can retrieve all orders.
- *     tags: [Orders]
- *     security:
- *       - Bearer: []
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: success
- *                 doc:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/Order'
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
+ *   name: TypeParcels
+ *   description: TypeParcel management and retrieval
  */
 
 /**
  * @swagger
- * /orders:
+ * /typeParcels:
  *   post:
- *     summary: Create a order
- *     description: EMP can create order.
- *     tags: [Orders]
+ *     summary: Create a typeParcel
+ *     description: ADMIN can create typeParcel.
+ *     tags: [TypeParcels]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -51,7 +19,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/createOrder'
+ *             $ref: '#/components/schemas/createTypeParcel'
  *     responses:
  *       "201":
  *         description: Created
@@ -64,7 +32,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Order'
+ *                     $ref: '#/components/schemas/TypeParcel'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -73,9 +41,9 @@
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all orders
- *     description: ADMIN,EMP can retrieve all orders.
- *     tags: [Orders]
+ *     summary: Get all typeParcels
+ *     description: USER,ADMIN,EMP can retrieve all typeParcels.
+ *     tags: [TypeParcels]
  *     security:
  *       - Bearer: []
  *     parameters:
@@ -97,7 +65,7 @@
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of orders
+ *         description: Maximum number of typeParcels
  *       - in: query
  *         name: search
  *         schema:
@@ -132,7 +100,7 @@
  *                 doc:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Order'
+ *                     $ref: '#/components/schemas/TypeParcel'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -141,11 +109,11 @@
 
 /**
  * @swagger
- * /orders/{id}:
+ * /typeParcels/{id}:
  *   get:
- *     summary: Get a order
- *     description: ADMIN,EMP can use this router.
- *     tags: [Orders]
+ *     summary: Get a typeParcel
+ *     description: USER,ADMIN,EMP can use this router.
+ *     tags: [TypeParcels]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -154,7 +122,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Order id
+ *         description: TypeParcel id
  *     responses:
  *       "200":
  *         description: OK
@@ -167,7 +135,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Order'
+ *                     $ref: '#/components/schemas/TypeParcel'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -176,9 +144,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a order
- *     description: EMP can use this router.
- *     tags: [Orders]
+ *     summary: Update a typeParcel
+ *     description: ADMIN can use this router.
+ *     tags: [TypeParcels]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -187,13 +155,13 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Order id
+ *         description: TypeParcel id
  *     requestBody:
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/updateOrder'
+ *               $ref: '#/components/schemas/updateTypeParcel'
  *     responses:
  *       "200":
  *         description: OK
@@ -206,7 +174,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Order'
+ *                     $ref: '#/components/schemas/TypeParcel'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -215,9 +183,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a  order.
- *     description: EMP can use this router.
- *     tags: [Orders]
+ *     summary: Delete a  typeParcel.
+ *     description: ADMIN can use this router.
+ *     tags: [TypeParcels]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -226,7 +194,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Order id
+ *         description: TypeParcel id
  *     responses:
  *       "200":
  *         description: OK
@@ -249,50 +217,100 @@
  *         $ref: '#/components/responses/NotFound'
  */
 
-exports.updateOrder = {
+exports.TypeParcel = {
   type: 'object',
   properties: {
-    destination_location: { type: 'string' },
-    confirmed: { type: 'boolean' },
-    order_status: { type: 'string' },
-    payment_method: { type: 'string' },
-    tolal_price: { type: 'number' },
-    item: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          type: { type: 'string' },
-          image_url: { type: 'string' },
-          is_fragile: { type: 'boolean' },
-          weight: { type: 'number' },
-          description: { type: 'string' },
-          item_name: { type: 'string' },
-        },
-      },
-    },
+    id: { type: 'string' },
+    // property
+    image: { type: 'string' },
+    price: { type: 'number' },
+    description: { type: 'string' },
+    width: { type: 'number' },
+    hight: { type: 'number' },
     name: { type: 'string' },
-    user: { type: 'string' },
   },
   example: {
-    destination_locationId: '673c40cd59e293827f79e398',
-    confirmed: true,
-    order_status: 'Successfully completed',
-    payment_method: 'Bank payment',
-    tolal_price: 299,
-    item: [
-      {
-        type: 'Clothing and fabrics',
-        image_url: '',
-        is_fragile: true,
-        weight: 15,
-        description: 'Legal papers...',
-        item_name: 'Legal papers',
-      },
-    ],
-    name: '&#34;Standard Delivery&#34;',
-    userId: '673c40cd59e293827f79e398',
+    _id: '5ebac534954b54139806c112',
+    // property example
+    image: './image.jpg',
+
+    price: 200,
+
+    description: 'descrition',
+
+    width: 50,
+
+    hight: 100,
+
+    name: 'big',
+
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
+  },
+};
+exports.createTypeParcel = {
+  type: 'object',
+  properties: {
+    // create property
+    image: { type: 'string' },
+    price: { type: 'number' },
+    description: { type: 'string' },
+    width: { type: 'number' },
+    hight: { type: 'number' },
+    name: { type: 'string' },
+  },
+  example: {
+    // create property example
+    image: './image.jpg',
+
+    price: 200,
+
+    description: 'descrition',
+
+    width: 50,
+
+    hight: 100,
+
+    name: 'big',
+  },
+  required: [
+    // required property
+    'image',
+
+    'price',
+
+    'description',
+
+    'width',
+
+    'hight',
+
+    'name',
+  ],
+};
+exports.updateTypeParcel = {
+  type: 'object',
+  properties: {
+    // update property
+    image: { type: 'string' },
+    price: { type: 'number' },
+    description: { type: 'string' },
+    width: { type: 'number' },
+    hight: { type: 'number' },
+    name: { type: 'string' },
+  },
+  example: {
+    // update property example
+    image: './image.jpg',
+
+    price: 200,
+
+    description: 'descrition',
+
+    width: 50,
+
+    hight: 100,
+
+    name: 'big',
   },
 };

@@ -28,6 +28,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     req.body,
     //  property update
 
+    'address',
+
     'phone',
     'name',
     'email',

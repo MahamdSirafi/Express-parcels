@@ -320,6 +320,9 @@ exports.User = {
   properties: {
     id: { type: 'string' },
     // property
+
+    address: { type: 'string' },
+
     phone: { type: 'string' },
     email: { type: 'string', format: 'email' },
     name: { type: 'string' },
@@ -330,6 +333,8 @@ exports.User = {
   example: {
     id: '5ebac534954b54139806c112',
     // property example
+
+    address: 'aleppo',
 
     phone: '0977786725',
     email: 'user@gmail.com',
@@ -344,6 +349,8 @@ exports.createUser = {
   properties: {
     // create property
 
+    address: { type: 'string' },
+
     centerId: { type: 'string' },
     name: { type: 'string' },
     email: { type: 'string' },
@@ -353,7 +360,10 @@ exports.createUser = {
   },
   example: {
     // create property example
-    centerIdL: "5ebac534954b54139806c112",
+
+    address: 'aleppo',
+
+    centerIdL: '5ebac534954b54139806c112',
     name: 'Mohammed Seirafi',
     email: 'adel@gmail.com',
     password: '123454321',
@@ -368,12 +378,16 @@ exports.updateMe = {
   properties: {
     // update property
 
+    address: { type: 'string' },
+
     name: { type: 'string' },
     email: { type: 'string' },
     photo: { type: 'string' },
   },
   example: {
     // update property example
+
+    address: 'aleppo',
 
     name: 'Mohammed Seirafi',
     email: 'adel@gmail.com',

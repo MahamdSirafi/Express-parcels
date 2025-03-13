@@ -210,11 +210,13 @@
  *                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWQ4ZDJjZjBkMmM5NWNiOTM5OTgyZSIsImlhdCI6MTcxMzIxMjcxNywiZXhwIjoxNzIwOTg4NzE3fQ.FbARIC4jDWtOb0koNJK69F2MTu8j9LeS3RaFrT-AP7c
  */
 
-
 exports.signUp = {
   type: 'object',
   required: [
     // required property
+
+    'address',
+
     'phone',
     'name',
     'email',
@@ -223,6 +225,8 @@ exports.signUp = {
   properties: {
     //  property signup
 
+    address: { type: 'string' },
+
     name: { type: 'string' },
     email: { type: 'string' },
     phone: { type: 'string' },
@@ -230,6 +234,8 @@ exports.signUp = {
   },
   example: {
     // create property example
+
+    address: 'aleppo',
 
     phone: '0945915868',
     name: 'Adel Seirafi',

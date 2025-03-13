@@ -1,5 +1,29 @@
 const swaggerJsDoc = require('swagger-jsdoc');
-const { Order, createOrder, updateOrder } = require('./routes/orderSwagger');
+const {
+  Parcel,
+  createParcel,
+  updateParcel,
+} = require('./routes/parcelSwagger');
+const {
+  Parcel,
+  createParcel,
+  updateParcel,
+} = require('./routes/parcelSwagger');
+const {
+  Parcel,
+  createParcel,
+  updateParcel,
+} = require('./routes/parcelSwagger');
+const {
+  TypeParcel,
+  createTypeParcel,
+  updateTypeParcel,
+} = require('./routes/typeParcelSwagger');
+const {
+  Ratings,
+  createRatings,
+  updateRatings,
+} = require('./routes/ratingsSwagger');
 const {
   ServiceCenters,
   createServiceCenters,
@@ -33,9 +57,21 @@ const options = {
     ],
     components: {
       schemas: {
-        Order,
-        createOrder,
-        updateOrder,
+        Parcel,
+        createParcel,
+        updateParcel,
+        Parcel,
+        createParcel,
+        updateParcel,
+        Parcel,
+        createParcel,
+        updateParcel,
+        TypeParcel,
+        createTypeParcel,
+        updateTypeParcel,
+        Ratings,
+        createRatings,
+        updateRatings,
         ServiceCenters,
         createServiceCenters,
         updateServiceCenters,

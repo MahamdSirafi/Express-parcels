@@ -1,3 +1,4 @@
+const Ratings = require('./ratingsModel');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
@@ -6,6 +7,10 @@ const { RoleCode } = require('../utils/enum');
 const userSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
+    address: {
+      type: String,
+      required: [true, 'Please enter name  address'],
+    },
     centerId: {
       type: mongoose.Schema.ObjectId,
       ref: 'ServiceCenters',
@@ -53,14 +58,20 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
-    address: {
-      type: String,
-      required: [true, 'Please provide your address'],
-    },
   },
   { versionKey: false },
 );
 // <creating-function-schema />
+
+userSchema.post('findOneAndDelete', async function (doc) {
+  if (doc) {
+    try {
+      await Ratings.deleteMany({ userId: doc._id });
+    } catch (error) {
+      return next(new AppError('error deleting ratingss', 500));
+    }
+  }
+});
 
 userSchema.pre('save', async function (next) {
   // Only run this function if password was actually modified

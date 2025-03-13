@@ -33,6 +33,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     //  property signup
 
+    address: req.body.address,
+
     phone: req.body.phone,
   });
   const url = `${req.protocol}://${req.get('host')}/me`;
