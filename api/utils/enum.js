@@ -1,7 +1,3 @@
-exports.status = {
-  Received: 'Received',
-};
-
 exports.payment_method = {
   cash: 'cash',
   Bank: 'Bank',
@@ -22,6 +18,7 @@ exports.Env = {
   test: 'test',
 };
 // <creating-enum-type />
+
 exports.statusParcel = {
   Received:'Received',
   Inprocess:'Inprocess',

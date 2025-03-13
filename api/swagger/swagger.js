@@ -5,16 +5,6 @@ const {
   updateParcel,
 } = require('./routes/parcelSwagger');
 const {
-  Parcel,
-  createParcel,
-  updateParcel,
-} = require('./routes/parcelSwagger');
-const {
-  Parcel,
-  createParcel,
-  updateParcel,
-} = require('./routes/parcelSwagger');
-const {
   TypeParcel,
   createTypeParcel,
   updateTypeParcel,
@@ -57,12 +47,6 @@ const options = {
     ],
     components: {
       schemas: {
-        Parcel,
-        createParcel,
-        updateParcel,
-        Parcel,
-        createParcel,
-        updateParcel,
         Parcel,
         createParcel,
         updateParcel,

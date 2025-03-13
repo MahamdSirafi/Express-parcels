@@ -1,15 +1,14 @@
-const { status } = require('../utils/enum');
+const { statusParcel } = require('../utils/enum');
 const { payment_method } = require('../utils/enum');
 const mongoose = require('mongoose');
 const parcelSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
-    status: [
-      {
-        type: String,
-        enum: Object.values(status),
-      },
-    ],
+    status: {
+      type: String,
+      enum: Object.values(statusParcel), // استخراج القيم المتاحة من statusParcel
+      required: [true, 'Please enter name stauts'],   
+     },
     payment_method: {
       type: String,
       enum: Object.values(payment_method),

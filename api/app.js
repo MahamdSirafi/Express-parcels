@@ -75,8 +75,6 @@ app.use(
 app.use(compression());
 //R <dont remove this line>
 const parcelRouter = require('./routes/parcelRoutes');
-const parcelRouter = require('./routes/parcelRoutes');
-const parcelRouter = require('./routes/parcelRoutes');
 const typeParcelRouter = require('./routes/typeParcelRoutes');
 const ratingsRouter = require('./routes/ratingsRoutes');
 const serviceCentersRouter = require('./routes/serviceCentersRoutes');
@@ -84,8 +82,6 @@ const userRouter = require('./routes/userRoutes');
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 //ROUTES <dont remove this line>
-app.use('/api/v1.0.0/parcels', parcelRouter);
-app.use('/api/v1.0.0/parcels', parcelRouter);
 app.use('/api/v1.0.0/parcels', parcelRouter);
 app.use('/api/v1.0.0/typeParcels', typeParcelRouter);
 app.use('/api/v1.0.0/ratings', ratingsRouter);
