@@ -7,9 +7,9 @@ const ratingsSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Please enter name  user'],
     },
-    orderId: {
+    parcelId: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Order',
+      ref: 'Parcel',
       unique: true,
     },
     comment: {

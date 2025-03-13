@@ -7,8 +7,8 @@ const parcelSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: Object.values(statusParcel), // استخراج القيم المتاحة من statusParcel
-      required: [true, 'Please enter name stauts'],   
-     },
+      default: 'Default Name Status'   
+      },
     payment_method: {
       type: String,
       enum: Object.values(payment_method),
