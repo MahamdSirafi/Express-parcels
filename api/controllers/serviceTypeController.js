@@ -1,0 +1,9 @@
+const ServiceType = require('../models/serviceTypeModel');
+const AppError = require('../utils/appError');
+const handlerFactory = require('../utils/handlerFactory');
+const catchAsync = require('../utils/catchAsync');
+exports.getServiceType = handlerFactory.getOne(ServiceType);
+exports.createServiceType = handlerFactory.createOne(ServiceType);
+exports.updateServiceType = handlerFactory.updateOne(ServiceType);
+exports.deleteServiceType = handlerFactory.deleteOne(ServiceType);
+exports.getAllServiceType = handlerFactory.getAll(ServiceType);

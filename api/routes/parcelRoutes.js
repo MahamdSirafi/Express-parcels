@@ -5,6 +5,8 @@ const { USER, ADMIN, EMP } = RoleCode;
 const express = require('express');
 const router = express.Router();
 router.use(protect);
+router.route('/:id/paid').patch(restrictTo(EMP), parcelController.paid);
+router.route('/:id/canceld').patch(restrictTo(USER), parcelController.canceled);
 router
   .route('/')
   .get(restrictTo(USER, ADMIN, EMP), parcelController.getAllParcel)

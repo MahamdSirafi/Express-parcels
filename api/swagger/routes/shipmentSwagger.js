@@ -1,17 +1,17 @@
 /**
  * @swagger
  * tags:
- *   name: Parcels
- *   description: Parcel management and retrieval
+ *   name: Shipments
+ *   description: Shipment management and retrieval
  */
 
 /**
  * @swagger
- * /parcels:
+ * /shipments:
  *   post:
- *     summary: Create a parcel
- *     description: ADMIN,EMP can create parcel.
- *     tags: [Parcels]
+ *     summary: Create a shipment
+ *     description: ADMIN,EMP can create shipment.
+ *     tags: [Shipments]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -19,7 +19,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/createParcel'
+ *             $ref: '#/components/schemas/createShipment'
  *     responses:
  *       "201":
  *         description: Created
@@ -32,7 +32,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Shipment'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -41,9 +41,9 @@
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all parcels
- *     description: USER,ADMIN,EMP can retrieve all parcels.
- *     tags: [Parcels]
+ *     summary: Get all shipments
+ *     description: ADMIN,EMP can retrieve all shipments.
+ *     tags: [Shipments]
  *     security:
  *       - Bearer: []
  *     parameters:
@@ -65,7 +65,7 @@
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of parcels
+ *         description: Maximum number of shipments
  *       - in: query
  *         name: search
  *         schema:
@@ -100,7 +100,7 @@
  *                 doc:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Shipment'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -109,11 +109,11 @@
 
 /**
  * @swagger
- * /parcels/{id}:
+ * /shipments/{id}:
  *   get:
- *     summary: Get a parcel
- *     description: USER,ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     summary: Get a shipment
+ *     description: ADMIN,EMP can use this router.
+ *     tags: [Shipments]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -122,7 +122,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: Shipment id
  *     responses:
  *       "200":
  *         description: OK
@@ -135,7 +135,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Shipment'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -144,9 +144,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a parcel
+ *     summary: Update a shipment
  *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     tags: [Shipments]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -155,13 +155,13 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: Shipment id
  *     requestBody:
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/updateParcel'
+ *               $ref: '#/components/schemas/updateShipment'
  *     responses:
  *       "200":
  *         description: OK
@@ -174,7 +174,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Shipment'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -183,9 +183,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a  parcel.
+ *     summary: Delete a  shipment.
  *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     tags: [Shipments]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -194,7 +194,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: Shipment id
  *     responses:
  *       "200":
  *         description: OK
@@ -217,98 +217,148 @@
  *         $ref: '#/components/responses/NotFound'
  */
 
-exports.Parcel = {
+exports.Shipment = {
   type: 'object',
   properties: {
     id: { type: 'string' },
     // property
-    serviceType: { type: 'string' },
-    status: { type: 'array', items: { type: 'string', enum: ['Received'] } },
-    payment_method: { type: 'string', enum: ['cash', 'Bank'] },
-    price: { type: 'number' },
-    target_center: { type: 'string' },
-    source_center: { type: 'string' },
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    status: { type: 'string', enum: ['packing', 'delivered'] },
+    current_location: {
+      type: 'object',
+      properties: {
+        //  properties current_location
+        longitude: { type: 'number' },
+
+        latitude: { type: 'number' },
+      },
+    },
+    source_centerIdId: { type: 'string' },
+    description: { type: 'string' },
+    source_centerId: { type: 'string' },
+    target_centerId: { type: 'string' },
+    parcel: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
-    serviceTypeId: '673c40cd59e293827f79e398',
+    status: 'packing',
 
-    status: ['Received'],
+    current_location: {
+      // property example current_location
+      longitude: 14,
 
-    payment_method: 'cash',
+      latitude: 12,
+    },
 
-    price: 155,
+    source_centerIdIdId: '673c40cd59e293827f79e398',
 
-    target_centerId: '673c40cd59e293827f79e398',
+    description:
+      'The shipment departs from Aleppo International Airport or is transported via Damascus International Airport to reach the international transit center.',
 
-    source_centerId: '673c40cd59e293827f79e398',
+    source_centerIdId: '673c40cd59e293827f79e398',
 
-    userId: '673c40cd59e293827f79e398',
+    target_centerIdId: '673c40cd59e293827f79e398',
 
-    typeparcelId: '673c40cd59e293827f79e398',
+    parcelId: '673c40cd59e293827f79e398',
 
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
   },
 };
-exports.createParcel = {
+exports.createShipment = {
   type: 'object',
   properties: {
     // create property
-    serviceType: { type: 'string' },
+    status: { type: 'string', enum: ['packing', 'delivered'] },
+    current_location: {
+      type: 'object',
+      properties: {
+        //  create  properties current_location
+        longitude: { type: 'number' },
 
-    target_center: { type: 'string' },
+        latitude: { type: 'number' },
+      },
+    },
 
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    description: { type: 'string' },
+    source_centerId: { type: 'string' },
+    target_centerId: { type: 'string' },
+    parcel: { type: 'string' },
   },
   example: {
     // create property example
-    serviceTypeId: '673c40cd59e293827f79e398',
+    status: 'packing',
 
-    target_centerId: '673c40cd59e293827f79e398',
+    current_location: {
+      // create property example current_location
+      longitude: 14,
 
-    userId: '673c40cd59e293827f79e398',
+      latitude: 12,
+    },
 
-    typeparcelId: '673c40cd59e293827f79e398',
+    description:
+      'The shipment departs from Aleppo International Airport or is transported via Damascus International Airport to reach the international transit center.',
+
+    source_centerIdId: '673c40cd59e293827f79e398',
+
+    target_centerIdId: '673c40cd59e293827f79e398',
+
+    parcelId: '673c40cd59e293827f79e398',
   },
   required: [
     // required property
-    'serviceType',
 
-    'price',
+    'current_location.longitude',
 
-    'target_center',
+    'current_location.latitude',
 
-    'source_center',
+    'source_centerIdId',
 
-    'user',
+    'source_centerId',
 
-    'typeparcel',
+    'target_centerId',
+
+    'parcel',
   ],
 };
-exports.updateParcel = {
+exports.updateShipment = {
   type: 'object',
   properties: {
     // update property
-    serviceType: { type: 'string' },
+    status: { type: 'string', enum: ['packing', 'delivered'] },
+    current_location: {
+      type: 'object',
+      properties: {
+        //  update properties current_location
+        longitude: { type: 'number' },
 
-    target_center: { type: 'string' },
+        latitude: { type: 'number' },
+      },
+    },
 
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    description: { type: 'string' },
+    source_centerId: { type: 'string' },
+    target_centerId: { type: 'string' },
+    parcel: { type: 'string' },
   },
   example: {
     // update property example
-    serviceTypeId: '673c40cd59e293827f79e398',
+    status: 'packing',
 
-    target_centerId: '673c40cd59e293827f79e398',
+    current_location: {
+      // update property example current_location
+      longitude: 14,
 
-    userId: '673c40cd59e293827f79e398',
+      latitude: 12,
+    },
 
-    typeparcelId: '673c40cd59e293827f79e398',
+    description:
+      'The shipment departs from Aleppo International Airport or is transported via Damascus International Airport to reach the international transit center.',
+
+    source_centerIdId: '673c40cd59e293827f79e398',
+
+    target_centerIdId: '673c40cd59e293827f79e398',
+
+    parcelId: '673c40cd59e293827f79e398',
   },
 };

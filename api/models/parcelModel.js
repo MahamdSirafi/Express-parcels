@@ -4,11 +4,16 @@ const mongoose = require('mongoose');
 const parcelSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
+    serviceTypeId: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'ServiceType',
+      required: [true, 'Please enter name  serviceType'],
+    },
     status: {
       type: String,
       enum: Object.values(statusParcel), // استخراج القيم المتاحة من statusParcel
-      default: 'Default Name Status'   
-      },
+      default: 'Received',
+    },
     payment_method: {
       type: String,
       enum: Object.values(payment_method),
@@ -41,6 +46,14 @@ const parcelSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false },
 );
 // <creating-function-schema />
+
+parcelSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'serviceTypeId',
+    select: '-_id',
+  });
+  next();
+});
 
 parcelSchema.pre(/^find/, function (next) {
   this.populate({

@@ -1,17 +1,17 @@
 /**
  * @swagger
  * tags:
- *   name: Parcels
- *   description: Parcel management and retrieval
+ *   name: ProessStors
+ *   description: ProessStor management and retrieval
  */
 
 /**
  * @swagger
- * /parcels:
+ * /proessStors:
  *   post:
- *     summary: Create a parcel
- *     description: ADMIN,EMP can create parcel.
- *     tags: [Parcels]
+ *     summary: Create a proessStor
+ *     description: ADMIN,EMP can create proessStor.
+ *     tags: [ProessStors]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -19,7 +19,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/createParcel'
+ *             $ref: '#/components/schemas/createProessStor'
  *     responses:
  *       "201":
  *         description: Created
@@ -32,7 +32,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ProessStor'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -41,9 +41,9 @@
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all parcels
- *     description: USER,ADMIN,EMP can retrieve all parcels.
- *     tags: [Parcels]
+ *     summary: Get all proessStors
+ *     description: ADMIN,EMP can retrieve all proessStors.
+ *     tags: [ProessStors]
  *     security:
  *       - Bearer: []
  *     parameters:
@@ -65,7 +65,7 @@
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of parcels
+ *         description: Maximum number of proessStors
  *       - in: query
  *         name: search
  *         schema:
@@ -100,7 +100,7 @@
  *                 doc:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ProessStor'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -109,11 +109,11 @@
 
 /**
  * @swagger
- * /parcels/{id}:
+ * /proessStors/{id}:
  *   get:
- *     summary: Get a parcel
- *     description: USER,ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     summary: Get a proessStor
+ *     description: ADMIN,EMP can use this router.
+ *     tags: [ProessStors]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -122,7 +122,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: ProessStor id
  *     responses:
  *       "200":
  *         description: OK
@@ -135,7 +135,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ProessStor'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -144,9 +144,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a parcel
+ *     summary: Update a proessStor
  *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     tags: [ProessStors]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -155,13 +155,13 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: ProessStor id
  *     requestBody:
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/updateParcel'
+ *               $ref: '#/components/schemas/updateProessStor'
  *     responses:
  *       "200":
  *         description: OK
@@ -174,7 +174,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ProessStor'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -183,9 +183,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a  parcel.
+ *     summary: Delete a  proessStor.
  *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     tags: [ProessStors]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -194,7 +194,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: ProessStor id
  *     responses:
  *       "200":
  *         description: OK
@@ -217,98 +217,64 @@
  *         $ref: '#/components/responses/NotFound'
  */
 
-exports.Parcel = {
+exports.storageOperations = {
   type: 'object',
   properties: {
     id: { type: 'string' },
     // property
-    serviceType: { type: 'string' },
-    status: { type: 'array', items: { type: 'string', enum: ['Received'] } },
-    payment_method: { type: 'string', enum: ['cash', 'Bank'] },
-    price: { type: 'number' },
-    target_center: { type: 'string' },
-    source_center: { type: 'string' },
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    timeOut: { type: 'number' },
+    parcel: { type: 'string' },
+    center: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
-    serviceTypeId: '673c40cd59e293827f79e398',
+    timeOut: 13,
 
-    status: ['Received'],
+    parcelId: '673c40cd59e293827f79e398',
 
-    payment_method: 'cash',
-
-    price: 155,
-
-    target_centerId: '673c40cd59e293827f79e398',
-
-    source_centerId: '673c40cd59e293827f79e398',
-
-    userId: '673c40cd59e293827f79e398',
-
-    typeparcelId: '673c40cd59e293827f79e398',
+    centerId: '673c40cd59e293827f79e398',
 
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
   },
 };
-exports.createParcel = {
+exports.createstorageOperations = {
   type: 'object',
   properties: {
     // create property
-    serviceType: { type: 'string' },
 
-    target_center: { type: 'string' },
-
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    parcel: { type: 'string' },
+    center: { type: 'string' },
   },
   example: {
     // create property example
-    serviceTypeId: '673c40cd59e293827f79e398',
 
-    target_centerId: '673c40cd59e293827f79e398',
+    parcelId: '673c40cd59e293827f79e398',
 
-    userId: '673c40cd59e293827f79e398',
-
-    typeparcelId: '673c40cd59e293827f79e398',
+    centerId: '673c40cd59e293827f79e398',
   },
   required: [
     // required property
-    'serviceType',
 
-    'price',
+    'parcel',
 
-    'target_center',
-
-    'source_center',
-
-    'user',
-
-    'typeparcel',
+    'center',
   ],
 };
-exports.updateParcel = {
+exports.updatestorageOperations = {
   type: 'object',
   properties: {
     // update property
-    serviceType: { type: 'string' },
 
-    target_center: { type: 'string' },
-
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    parcel: { type: 'string' },
+    center: { type: 'string' },
   },
   example: {
     // update property example
-    serviceTypeId: '673c40cd59e293827f79e398',
 
-    target_centerId: '673c40cd59e293827f79e398',
+    parcelId: '673c40cd59e293827f79e398',
 
-    userId: '673c40cd59e293827f79e398',
-
-    typeparcelId: '673c40cd59e293827f79e398',
+    centerId: '673c40cd59e293827f79e398',
   },
 };

@@ -1,17 +1,17 @@
 /**
  * @swagger
  * tags:
- *   name: Parcels
- *   description: Parcel management and retrieval
+ *   name: ServiceTypes
+ *   description: ServiceType management and retrieval
  */
 
 /**
  * @swagger
- * /parcels:
+ * /serviceTypes:
  *   post:
- *     summary: Create a parcel
- *     description: ADMIN,EMP can create parcel.
- *     tags: [Parcels]
+ *     summary: Create a serviceType
+ *     description: ADMIN,EMP can create serviceType.
+ *     tags: [ServiceTypes]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -19,7 +19,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/createParcel'
+ *             $ref: '#/components/schemas/createServiceType'
  *     responses:
  *       "201":
  *         description: Created
@@ -32,7 +32,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ServiceType'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -41,9 +41,9 @@
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all parcels
- *     description: USER,ADMIN,EMP can retrieve all parcels.
- *     tags: [Parcels]
+ *     summary: Get all serviceTypes
+ *     description: USER,ADMIN,EMP can retrieve all serviceTypes.
+ *     tags: [ServiceTypes]
  *     security:
  *       - Bearer: []
  *     parameters:
@@ -65,7 +65,7 @@
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of parcels
+ *         description: Maximum number of serviceTypes
  *       - in: query
  *         name: search
  *         schema:
@@ -100,7 +100,7 @@
  *                 doc:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ServiceType'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -109,11 +109,11 @@
 
 /**
  * @swagger
- * /parcels/{id}:
+ * /serviceTypes/{id}:
  *   get:
- *     summary: Get a parcel
+ *     summary: Get a serviceType
  *     description: USER,ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     tags: [ServiceTypes]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -122,7 +122,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: ServiceType id
  *     responses:
  *       "200":
  *         description: OK
@@ -135,7 +135,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ServiceType'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -144,9 +144,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a parcel
+ *     summary: Update a serviceType
  *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     tags: [ServiceTypes]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -155,13 +155,13 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: ServiceType id
  *     requestBody:
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/updateParcel'
+ *               $ref: '#/components/schemas/updateServiceType'
  *     responses:
  *       "200":
  *         description: OK
@@ -174,7 +174,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/ServiceType'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -183,9 +183,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a  parcel.
+ *     summary: Delete a  serviceType.
  *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     tags: [ServiceTypes]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -194,7 +194,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: ServiceType id
  *     responses:
  *       "200":
  *         description: OK
@@ -217,98 +217,96 @@
  *         $ref: '#/components/responses/NotFound'
  */
 
-exports.Parcel = {
+exports.ServiceType = {
   type: 'object',
   properties: {
     id: { type: 'string' },
     // property
-    serviceType: { type: 'string' },
-    status: { type: 'array', items: { type: 'string', enum: ['Received'] } },
-    payment_method: { type: 'string', enum: ['cash', 'Bank'] },
     price: { type: 'number' },
-    target_center: { type: 'string' },
-    source_center: { type: 'string' },
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    description: { type: 'string' },
+    // serviceType: { type: 'string' },
+    // insurance: { type: 'array', items: { type: 'string', enum: ['huge'] } },
+    // timeForPoint: { type: 'number' },
+    name: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
-    serviceTypeId: '673c40cd59e293827f79e398',
+    price: 144,
 
-    status: ['Received'],
+    description: 'descrption',
 
-    payment_method: 'cash',
+    // serviceTypeIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
 
-    price: 155,
+    // insurance: ['huge'],
 
-    target_centerId: '673c40cd59e293827f79e398',
+    // timeForPoint: 22,
 
-    source_centerId: '673c40cd59e293827f79e398',
-
-    userId: '673c40cd59e293827f79e398',
-
-    typeparcelId: '673c40cd59e293827f79e398',
+    name: 'quiqly',
 
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
   },
 };
-exports.createParcel = {
+exports.createServiceType = {
   type: 'object',
   properties: {
     // create property
-    serviceType: { type: 'string' },
-
-    target_center: { type: 'string' },
-
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    price: { type: 'number' },
+    description: { type: 'string' },
+    // serviceType: { type: 'string' },
+    // insurance: { type: 'array', items: { type: 'string', enum: ['huge'] } },
+    // timeForPoint: { type: 'number' },
+    name: { type: 'string' },
   },
   example: {
     // create property example
-    serviceTypeId: '673c40cd59e293827f79e398',
+    price: 144,
 
-    target_centerId: '673c40cd59e293827f79e398',
+    description: 'descrption',
 
-    userId: '673c40cd59e293827f79e398',
+    // serviceTypeIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
 
-    typeparcelId: '673c40cd59e293827f79e398',
+    // insurance: ['huge'],
+
+    // timeForPoint: 22,
+
+    name: 'quiqly',
   },
   required: [
     // required property
-    'serviceType',
-
     'price',
 
-    'target_center',
+    'description',
 
-    'source_center',
+    // 'timeForPoint',
 
-    'user',
-
-    'typeparcel',
+    'name',
   ],
 };
-exports.updateParcel = {
+exports.updateServiceType = {
   type: 'object',
   properties: {
     // update property
-    serviceType: { type: 'string' },
-
-    target_center: { type: 'string' },
-
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    price: { type: 'number' },
+    description: { type: 'string' },
+    // serviceType: { type: 'string' },
+    // insurance: { type: 'array', items: { type: 'string', enum: ['huge'] } },
+    // timeForPoint: { type: 'number' },
+    name: { type: 'string' },
   },
   example: {
     // update property example
-    serviceTypeId: '673c40cd59e293827f79e398',
+    price: 144,
 
-    target_centerId: '673c40cd59e293827f79e398',
+    description: 'descrption',
 
-    userId: '673c40cd59e293827f79e398',
+    // serviceTypeIds: ['673c40cd59e293827f79e398', '673c40cd59e293827f79e399'],
 
-    typeparcelId: '673c40cd59e293827f79e398',
+    // insurance: ['huge'],
+
+    // timeForPoint: 22,
+
+    name: 'quiqly',
   },
 };
