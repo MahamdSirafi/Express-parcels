@@ -7,10 +7,6 @@ const { RoleCode } = require('../utils/enum');
 const userSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
-    address: {
-      type: String,
-      required: [true, 'Please enter name  address'],
-    },
     centerId: {
       type: mongoose.Schema.ObjectId,
       ref: 'ServiceCenters',
@@ -20,7 +16,7 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Please enter name  phone'],
       unique: true,
     },
-    name: {
+    fullName: {
       type: String,
       required: [true, 'Please tell us your name!'],
       trim: true,

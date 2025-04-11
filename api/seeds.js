@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const User = require('./models/userModel');
 const admin = {
-  name: 'admin',
+  fullName: 'admin',
   email: process.env.ADMIN_EMAIL,
   phone: '0945915868',
   password: process.env.ADMIN_PASSWORD,

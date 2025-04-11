@@ -33,7 +33,6 @@ exports.statusParcel = {
   Inprocess: 'Inprocess',
   InTransit: 'In Transit',
   Inwarehouse: 'Inwarehouse',
-  Intransportation: 'Intransportation',
   Return: 'Return',
   Canceled: 'Canceled',
   Missing: 'Missing ',

@@ -31,7 +31,6 @@ router.patch(
   userController.updateMe,
 );
 router.patch('/updateMe', authMiddlewers.protect, userController.updateMe);
-router.delete('/deleteMe', authMiddlewers.protect, userController.deleteMe);
 router
   .route('/')
   .get(
