@@ -13,7 +13,9 @@ router
   .route('/:id')
   .get(restrictTo(ADMIN, EMP), shipmentController.getShipment)
   .patch(restrictTo(ADMIN, EMP), shipmentController.updateShipment)
-  .delete(restrictTo(ADMIN, EMP), shipmentController.deleteShipment);
+  .delete(restrictTo(ADMIN, EMP), shipmentController.deleteShipment); 
+
+  
   const { addParcelToShipment } = require('../controllers/shipmentController');
 router.post('/addParcel', addParcelToShipment);
 const { deliverShipment } = require('../controllers/shipmentController');
