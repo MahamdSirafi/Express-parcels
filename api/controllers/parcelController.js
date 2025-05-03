@@ -60,3 +60,18 @@ const doc = await Parcel.findByIdAndUpdate(req.params.id, req.body, {
     doc,
   });
 });
+exports.location = catchAsync(async (req, res, next) => {
+  // توليد خط عرض عشوائي بين 32 و37
+  const latitude = (Math.random() * 5 + 32).toFixed(6);
+  
+  // توليد خط طول عشوائي بين 35 و42
+  const longitude = (Math.random() * 7 + 35).toFixed(6);
+
+  res.status(200).json({
+    status: 'success',
+    doc: {
+      longitude,
+      latitude
+    },
+  });
+});
