@@ -20,13 +20,13 @@ const serviceTypeSchema = new mongoose.Schema(
 );
 // <creating-function-schema />
 
-serviceTypeSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'serviceTypeIds',
-    select: '-_id',
-  });
-  next();
-});
+// serviceTypeSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'serviceTypeIds',
+//     select: '-_id',
+//   });
+//   next();
+// });
 
 const ServiceType = mongoose.model('ServiceType', serviceTypeSchema);
 module.exports = ServiceType;

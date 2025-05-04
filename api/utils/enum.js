@@ -29,12 +29,9 @@ exports.insurance = {
 };
 
 exports.statusParcel = {
-  Received: 'Received',
-  Inprocess: 'Inprocess',
-  InTransit: 'In Transit',
-  Inwarehouse: 'Inwarehouse',
-  Return: 'Return',
-  Canceled: 'Canceled',
-  Missing: 'Missing ',
-  Damaged: 'Damaged',
+  paid: 'paid',
+  delivered: 'delivered',
+  Indelivery:'indelivery',
+  canceld: 'canceld',
+  Inprocess : 'Inprocess'
 };

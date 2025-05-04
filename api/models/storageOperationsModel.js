@@ -13,7 +13,7 @@ const storageOperationsSchema = new mongoose.Schema(
     },
     centerId: {
       type: mongoose.Schema.ObjectId,
-      ref: 'ServiceCenter',
+      ref: 'ServiceCenters',
       required: [true, 'Please enter name  center'],
     },
   },
@@ -24,7 +24,6 @@ const storageOperationsSchema = new mongoose.Schema(
 storageOperationsSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'parcelId',
-    select: '-_id',
   });
   next();
 });

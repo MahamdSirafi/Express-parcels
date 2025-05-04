@@ -11,8 +11,8 @@ const parcelSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: Object.values(statusParcel), // استخراج القيم المتاحة من statusParcel
-      default: 'Received',
+      enum: Object.values(statusParcel), 
+      default: 'Inprocess',
     },
     payment_method: {
       type: String,
@@ -29,7 +29,7 @@ const parcelSchema = new mongoose.Schema(
     },
     source_centerId: {
       type: mongoose.Schema.ObjectId,
-      ref: 'ServiceCenter',
+      ref: 'ServiceCenters',
       required: [true, 'Please enter name  source_center'],
     },
     userId: {
@@ -39,7 +39,7 @@ const parcelSchema = new mongoose.Schema(
     },
     typeparcelId: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Typeparcel',
+      ref: 'TypeParcel',
       required: [true, 'Please enter name  typeparcel'],
     },
   },
@@ -50,7 +50,7 @@ const parcelSchema = new mongoose.Schema(
 parcelSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'serviceTypeId',
-    select: '-_id',
+    select: 'name',
   });
   next();
 });
@@ -58,28 +58,28 @@ parcelSchema.pre(/^find/, function (next) {
 parcelSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'target_centerId',
-    select: '-_id',
+    select: 'name -_id ',
   });
   next();
 });
 parcelSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'source_centerId',
-    select: '-_id',
+    select: 'name -_id ',
   });
   next();
 });
 parcelSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'userId',
-    select: '-_id',
+    select: 'fullName -_id ',
   });
   next();
 });
 parcelSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'typeparcelId',
-    select: '-_id',
+    select: 'name -_id ',
   });
   next();
 });

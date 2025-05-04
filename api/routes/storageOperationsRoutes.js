@@ -11,10 +11,8 @@ router
 router
   .route('/')
   .get(restrictTo(ADMIN), storageOperationsController.getAllstorageOperations)
-  .post(restrictTo(ADMIN, EMP),storageOperationsController.createstorageOperations);
 router
   .route('/:id')
   .get(restrictTo(ADMIN, EMP), storageOperationsController.getstorageOperations)
-  .patch(restrictTo(ADMIN, EMP), storageOperationsController.updatestorageOperations)
   .delete(restrictTo(ADMIN, EMP), storageOperationsController.deletestorageOperations);
 module.exports = router;

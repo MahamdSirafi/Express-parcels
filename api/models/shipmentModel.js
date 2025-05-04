@@ -19,7 +19,7 @@ const shipmentSchema = new mongoose.Schema(
         required: [true, 'Please enter name  latitude'],
       },
     },
-    source_centerIdIdId: {
+    source_centerId: {
       type: mongoose.Schema.ObjectId,
       ref: 'ServiceCenters',
       required: [true, 'Please enter name  source_centerIdId'],
@@ -28,7 +28,7 @@ const shipmentSchema = new mongoose.Schema(
       type: String,
     },
 
-    target_centerIdId: {
+    target_centerId: {
       type: mongoose.Schema.ObjectId,
       ref: 'ServiceCenters',
       required: [true, 'Please enter name  target_centerId'],
@@ -45,25 +45,18 @@ const shipmentSchema = new mongoose.Schema(
 );
 // <creating-function-schema />
 
-shipmentSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'source_centerIdIdId',
-    select: '-_id',
-  });
-  next();
-});
 
 shipmentSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'source_centerIdId',
-    select: '-_id',
+    path: 'source_centerId',
+    select: 'name -_id',
   });
   next();
 });
 shipmentSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'target_centerIdId',
-    select: '-_id',
+    path: 'target_centerId',
+    select: 'name -_id',
   });
   next();
 });
