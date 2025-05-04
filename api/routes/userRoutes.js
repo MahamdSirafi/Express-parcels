@@ -4,25 +4,25 @@ const authController = require('./../controllers/authController');
 const authMiddlewers = require('./../middlewares/authMiddlewers');
 const imguserMiddlewers = require('./../middlewares/imguserMiddlewers');
 const router = express.Router();
-router.post('/login', authController.login);     
-router.get('/logout', authController.logout);      
-router.post('/forgotPassword', authController.forgotPassword);     
-router.patch('/resetPassword/:token', authController.resetPassword);   
+router.post('/login', authController.login);
+router.get('/logout', authController.logout);
+router.post('/forgotPassword', authController.forgotPassword);
+router.patch('/resetPassword/:token', authController.resetPassword);
 router.get('/resetPassword/:token', (req, res) => {
-  res.render('user/resetPassword4');    
+  res.render('user/resetPassword4');
 });
-router.post('/signup', authController.signup);     
-router.patch('/activeMe', authMiddlewers.protect, userController.activeMe); 
+router.post('/signup', authController.signup);
+router.patch('/activeMe', authMiddlewers.protect, userController.activeMe);
 router.patch(
   '/updateMyPassword',
   authMiddlewers.protect,
-  authController.updatePassword,  
+  authController.updatePassword,
 );
 router.get(
   '/me',
   authMiddlewers.protect,
   userController.getMe,
-  userController.getUser,  
+  userController.getUser,
 );
 router.patch(
   '/updateMeAndUpload',
@@ -30,20 +30,20 @@ router.patch(
   imguserMiddlewers.uploadUserPhoto,
   userController.updateMe,
 );
-router.patch('/updateMe', authMiddlewers.protect, userController.updateMe);  
+router.patch('/updateMe', authMiddlewers.protect, userController.updateMe);
 router
   .route('/')
   .get(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN', 'EMP'),
-    userController.getAllUsers,
+    userController.getAllUsers, 
   )
   .post(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.createUser, 
+    userController.createUser,
   );
 router
   .route('/:id')
@@ -51,18 +51,18 @@ router
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.getUser, 
+    userController.getUser,
   )
   .patch(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.updateUser, 
+    userController.updateUser,
   )
   .delete(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.deleteUser, 
+    userController.deleteUser,
   );
 module.exports = router;
