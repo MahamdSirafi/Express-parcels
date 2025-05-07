@@ -25,74 +25,75 @@ exports.addParcelToShipment = async (req, res, next) => {
     try {
         const { shipmentId, parcelId } = req.body;
 
-        // البحث عن الشحنة
+        // Find the shipment
         const shipment = await Shipment.findById(shipmentId);
         if (!shipment) {
-            return res.status(404).json({ message: 'الشحنة غير موجودة' });
+            return res.status(404).json({ message: 'Shipment not found' });
         }
-        ة
+
+        // Find the parcel
         const thisParcel = await Parcel.findById(parcelId);
         if (!thisParcel) {
-            return res.status(404).json({ message: 'الشحنة غير موجودة' });
+            return res.status(404).json({ message: 'Parcel not found' });
         }
-        thisParcel.status="Indelivery";
+
+        // Update parcel status
+        thisParcel.status = "Indelivery";
         await thisParcel.save();
 
-
-
-        // إضافة الطرد إلى الشحنة
+        // Add parcel to shipment
         shipment.parcelId.push(parcelId);
         await shipment.save();
 
-        // تحديث تاريخ التخزين للطرد في المركز الحالي
+        // Update storage operation for the parcel
         await StorageOperations.findOneAndUpdate(
-            { parcelId }, 
-            { timeOut: new Date() }, 
+            { parcelId },
+            { timeOut: new Date() },
             { new: true }
         );
 
         res.status(200).json({
             status: 'success',
-            message: 'تمت إضافة الطرد إلى الشحنة وتحديث عملية التخزين',
+            message: 'Parcel added to shipment and storage operation updated',
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+// Update shipment status to 'delivered' and create new storage operations
+
+exports.deliverShipment = async (req, res, next) => {
+    try {
+        const { shipmentId } = req.body;
+
+        // Check if shipment exists
+        const shipment = await Shipment.findById(shipmentId);
+        if (!shipment) {
+            return res.status(404).json({ message: 'Shipment not found' });
+        }
+
+        // Update shipment status to 'delivered'
+        shipment.status = 'delivered';
+        await shipment.save();
+
+        // Create new storage operations for each parcel
+        const storageOperations = shipment.parcelId.map(parcelId => ({
+            parcelId,
+            centerId: req.user.centerId,
+            timeOut: null, // operation starts now
+        }));
+
+        await StorageOperations.insertMany(storageOperations);
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Shipment delivered and storage operations created',
         });
     } catch (err) {
         next(err);
     }
 };
 
-    // تحديث حالة الشحنة عند التوصيل وإنشاء عمليات التخزين الجديدة
-
-    exports.deliverShipment = async (req, res, next) => {
-        try {
-            const { shipmentId } = req.body;
-    
-            // البحث عن الشحنة
-            const shipment = await Shipment.findById(shipmentId);
-            if (!shipment) {
-                return res.status(404).json({ message: 'الشحنة غير موجودة' });
-            }
-    
-            // تحديث حالة الشحنة إلى "تم التوصيل"
-            shipment.status = 'delivered';
-            await shipment.save();
-    
-            // المرور على جميع الطرود وإنشاء عمليات تخزين جديدة
-            const storageOperations = shipment.parcelId.map(parcelId => ({
-                parcelId,
-                centerId:req.user.centerId,
-                timeOut: null, // العملية بدأت الآن
-            }));
-    
-            await StorageOperations.insertMany(storageOperations);
-    
-            res.status(200).json({
-                status: 'success',
-                message: 'تم توصيل الشحنة وإنشاء عمليات التخزين الجديدة',
-            });
-        } catch (err) {
-            next(err);
-        }
-    };
     exports.getAllShipmentFree=catchAsync(async(req,res,next)=>{
         const doc = await Shipment.find({ source_centerId  :req.user.centerId,status:"packing"})
         res.status(200).json({
@@ -103,7 +104,7 @@ exports.addParcelToShipment = async (req, res, next) => {
      
     })
 
-    exports.getAllShipmentOutpcaking=catchAsync(async(req,res,next)=>{
+    exports.getAllShipmentOutforpcaking=catchAsync(async(req,res,next)=>{
         const doc = await Shipment.find({ target_centerId  :req.user.centerId,status:"indelivery"})
         res.status(200).json({
           status: 'success',

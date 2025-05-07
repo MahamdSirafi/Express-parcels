@@ -35,7 +35,7 @@ ratingsSchema.pre(/^find/, function (next) {
 });
 ratingsSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'orderId',
+    path: 'parcelId',
     select: '-_id',
   });
   next();

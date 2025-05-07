@@ -12,11 +12,11 @@ const shipmentSchema = new mongoose.Schema(
       // <creating-property-object-current_location />
       longitude: {
         type: Number,
-        required: [true, 'Please enter name  longitude'],
+        required: [true, 'Please enter longitude'],
       },
       latitude: {
         type: Number,
-        required: [true, 'Please enter name  latitude'],
+        required: [true, 'Please enter latitude'],
       },
     },
     source_centerId: {
@@ -45,27 +45,14 @@ const shipmentSchema = new mongoose.Schema(
 );
 // <creating-function-schema />
 
+shipmentSchema.pre(/^find/, function (next) {
+  this.populate([
+    { path: 'source_centerId', select: 'name -_id' },
+    { path: 'target_centerId', select: 'name -_id' },
+    { path: 'parcelId', select: '-_id' },
+  ]);
+  next();
+});
 
-shipmentSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'source_centerId',
-    select: 'name -_id',
-  });
-  next();
-});
-shipmentSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'target_centerId',
-    select: 'name -_id',
-  });
-  next();
-});
-shipmentSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'parcelId',
-    select: '-_id',
-  });
-  next();
-});
 const Shipment = mongoose.model('Shipment', shipmentSchema);
 module.exports = Shipment;

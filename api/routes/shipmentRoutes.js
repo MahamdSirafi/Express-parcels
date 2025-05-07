@@ -1,5 +1,3 @@
-const { deliverShipment } = require('../controllers/shipmentController');
-const { addParcelToShipment } = require('../controllers/shipmentController');
 const shipmentController = require('../controllers/shipmentController');
 const { protect, restrictTo } = require('./../middlewares/authMiddlewers');
 const { addVarBody} = require('./../middlewares/dynamicMiddleware');
@@ -8,17 +6,17 @@ const { USER, ADMIN, EMP } = RoleCode;
 const express = require('express');
 const router = express.Router();
 router.use(protect);
-router.post('/addParcel', addParcelToShipment);
-router.post('/deliver', deliverShipment);
+router.route('/addParcel').post(restrictTo(EMP) ,shipmentController.addParcelToShipment);
+router.route('/deliver').post(restrictTo(EMP), shipmentController.deliverShipment);
 router
-  .route('/:id/indelevery')
+  .route('/:id/indelivery')
   .patch(restrictTo(EMP),addVarBody("status","indelivery"), shipmentController.updateShipment)
   router
-  .route('/outpcaking')
-  .get(restrictTo(EMP), shipmentController.getAllShipmentOutpcaking);
+  .route('/out-for-packing')
+  .get(restrictTo(EMP), shipmentController.getAllShipmentOutforpcaking);
  
 router
-  .route('/forpacking')
+  .route('/ready-for-packing')
   .get(restrictTo(EMP), shipmentController.getAllShipmentFree);
 router
   .route('/')
