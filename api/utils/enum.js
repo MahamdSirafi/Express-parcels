@@ -18,9 +18,10 @@ exports.Env = {
   test: 'test',
 };
 // <creating-enum-type />
+
 exports.status = {
   packing: 'packing',
-  Indelivery:'Indelivery',
+  Indelivery: 'Indelivery',
   delivered: 'delivered',
 };
 
@@ -31,7 +32,7 @@ exports.insurance = {
 exports.statusParcel = {
   paid: 'paid',
   delivered: 'delivered',
-  Indelivery:'Indelivery',
+  Indelivery: 'Indelivery',
   canceld: 'canceld',
-  Inprocess : 'Inprocess'
+  Inprocess: 'Inprocess',
 };

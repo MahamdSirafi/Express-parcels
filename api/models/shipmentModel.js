@@ -26,6 +26,7 @@ const shipmentSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+      required: [true, 'Please enter  description'],
     },
 
     target_centerId: {
@@ -37,7 +38,7 @@ const shipmentSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.ObjectId,
         ref: 'Parcel',
-        required: [true, 'Please enter name  parcel'],
+        required: [true, 'Please provide a parcel ID'],
       },
     ],
   },

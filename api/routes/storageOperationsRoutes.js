@@ -10,9 +10,12 @@ router
   .get(restrictTo(EMP), storageOperationsController.getAllstorageOperations);
 router
   .route('/')
-  .get(restrictTo(ADMIN), storageOperationsController.getAllstorageOperations)
+  .get(restrictTo(ADMIN), storageOperationsController.getAllstorageOperations);
 router
   .route('/:id')
   .get(restrictTo(ADMIN, EMP), storageOperationsController.getstorageOperations)
-  .delete(restrictTo(ADMIN, EMP), storageOperationsController.deletestorageOperations);
+  .delete(
+    restrictTo(ADMIN, EMP),
+    storageOperationsController.deletestorageOperations,
+  );
 module.exports = router;

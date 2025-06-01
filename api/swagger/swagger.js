@@ -1,5 +1,10 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const {
+  Setting,
+  createSetting,
+  updateSetting,
+} = require('./routes/settingSwagger');
+const {
   Shipment,
   createShipment,
   updateShipment,
@@ -62,6 +67,9 @@ const options = {
     ],
     components: {
       schemas: {
+        Setting,
+        createSetting,
+        updateSetting,
         Shipment,
         createShipment,
         updateShipment,

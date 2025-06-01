@@ -74,6 +74,7 @@ app.use(
 //ضغط البيانات قبل ارسالها من اجل تسريع النقل
 app.use(compression());
 //R <dont remove this line>
+const settingRouter = require('./routes/settingRoutes');
 const shipmentRouter = require('./routes/shipmentRoutes');
 const storageOperationsRouter = require('./routes/storageOperationsRoutes');
 const serviceTypeRouter = require('./routes/serviceTypeRoutes');
@@ -85,6 +86,7 @@ const userRouter = require('./routes/userRoutes');
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 //ROUTES <dont remove this line>
+app.use('/api/v1.0.0/settings', settingRouter);
 app.use('/api/v1.0.0/shipments', shipmentRouter);
 app.use('/api/v1.0.0/storageOperations', storageOperationsRouter);
 app.use('/api/v1.0.0/serviceTypes', serviceTypeRouter);
