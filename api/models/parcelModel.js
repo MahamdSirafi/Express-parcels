@@ -4,6 +4,21 @@ const mongoose = require('mongoose');
 const parcelSchema = new mongoose.Schema(
   {
     // <creating-property-schema />
+    receive: {
+      // <creating-property-object-receive />
+      contact: {
+        type: String,
+        required: [true, 'Please enter name  fullName'],
+      },
+      fullName: {
+        type: String,
+        required: [true, 'Please enter name  fullName'],
+      },
+    },
+    descrtion: {
+      type: String,
+      required: [true, 'Please enter name  descrtion'],
+    },
     serviceTypeId: {
       type: mongoose.Schema.ObjectId,
       ref: 'ServiceType',
@@ -11,7 +26,7 @@ const parcelSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: Object.values(statusParcel), 
+      enum: Object.values(statusParcel),
       default: 'Inprocess',
     },
     payment_method: {

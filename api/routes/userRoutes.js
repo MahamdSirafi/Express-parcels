@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
+const { addVarBody } = require('./../middlewares/dynamicMiddleware');
 const authMiddlewers = require('./../middlewares/authMiddlewers');
 const imguserMiddlewers = require('./../middlewares/imguserMiddlewers');
 const router = express.Router();
@@ -32,12 +33,23 @@ router.patch(
 );
 router.patch('/updateMe', authMiddlewers.protect, userController.updateMe);
 router
+  .route('/addUser')
+  .post(
+    authMiddlewers.protect,
+    authMiddlewers.isactive,
+    authMiddlewers.restrictTo('EMP'),
+    addVarBody('role', 'USER'),
+    addVarBody('password', '123454321'),
+    userController.createUser,
+  );
+
+router
   .route('/')
   .get(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN', 'EMP'),
-    userController.getAllUsers, 
+    userController.getAllUsers,
   )
   .post(
     authMiddlewers.protect,
@@ -45,6 +57,7 @@ router
     authMiddlewers.restrictTo('ADMIN'),
     userController.createUser,
   );
+
 router
   .route('/:id')
   .get(

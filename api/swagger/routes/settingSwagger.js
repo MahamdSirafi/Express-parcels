@@ -1,17 +1,17 @@
 /**
  * @swagger
  * tags:
- *   name: Parcels
- *   description: Parcel management and retrieval
+ *   name: Settings
+ *   description: Setting management and retrieval
  */
 
 /**
  * @swagger
- * /parcels:
+ * /settings:
  *   post:
- *     summary: Create a parcel
- *     description: ADMIN,EMP can create parcel.
- *     tags: [Parcels]
+ *     summary: Create a setting
+ *     description: ADMIN can create setting.
+ *     tags: [Settings]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -19,7 +19,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/createParcel'
+ *             $ref: '#/components/schemas/createSetting'
  *     responses:
  *       "201":
  *         description: Created
@@ -32,7 +32,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Setting'
  *       "400":
  *         $ref: '#/components/responses/DuplicateEmail'
  *       "401":
@@ -41,9 +41,9 @@
  *         $ref: '#/components/responses/Forbidden'
  *
  *   get:
- *     summary: Get all parcels
- *     description: USER,ADMIN,EMP can retrieve all parcels.
- *     tags: [Parcels]
+ *     summary: Get all settings
+ *     description: ADMIN can retrieve all settings.
+ *     tags: [Settings]
  *     security:
  *       - Bearer: []
  *     parameters:
@@ -65,7 +65,7 @@
  *           type: integer
  *           minimum: 1
  *         default: 10
- *         description: Maximum number of parcels
+ *         description: Maximum number of settings
  *       - in: query
  *         name: search
  *         schema:
@@ -100,7 +100,7 @@
  *                 doc:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Setting'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -109,11 +109,11 @@
 
 /**
  * @swagger
- * /parcels/{id}:
+ * /settings/{id}:
  *   get:
- *     summary: Get a parcel
- *     description: USER,ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     summary: Get a setting
+ *     description: ADMIN can use this router.
+ *     tags: [Settings]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -122,7 +122,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: Setting id
  *     responses:
  *       "200":
  *         description: OK
@@ -135,7 +135,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Setting'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -144,9 +144,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   patch:
- *     summary: Update a parcel
- *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     summary: Update a setting
+ *     description: ADMIN can use this router.
+ *     tags: [Settings]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -155,13 +155,13 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: Setting id
  *     requestBody:
  *         required: true
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/updateParcel'
+ *               $ref: '#/components/schemas/updateSetting'
  *     responses:
  *       "200":
  *         description: OK
@@ -174,7 +174,7 @@
  *                   type: string
  *                   example: success
  *                 doc:
- *                     $ref: '#/components/schemas/Parcel'
+ *                     $ref: '#/components/schemas/Setting'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
  *       "403":
@@ -183,9 +183,9 @@
  *         $ref: '#/components/responses/NotFound'
  *
  *   delete:
- *     summary: Delete a  parcel.
- *     description: ADMIN,EMP can use this router.
- *     tags: [Parcels]
+ *     summary: Delete a  setting.
+ *     description: ADMIN can use this router.
+ *     tags: [Settings]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -194,7 +194,7 @@
  *         required: true
  *         schema:
  *           type: string
- *         description: Parcel id
+ *         description: Setting id
  *     responses:
  *       "200":
  *         description: OK
@@ -217,160 +217,89 @@
  *         $ref: '#/components/responses/NotFound'
  */
 
-exports.Parcel = {
+exports.Setting = {
   type: 'object',
   properties: {
     id: { type: 'string' },
     // property
-    receive: {
-      type: 'object',
-      properties: {
-        //  properties receive
-        contact: { type: 'string' },
-
-        fullName: { type: 'string' },
-      },
-    },
-    descrtion: { type: 'string' },
-    serviceType: { type: 'string' },
-    status: { type: 'array', items: { type: 'string', enum: ['Received'] } },
-    payment_method: { type: 'string', enum: ['cash', 'Bank'] },
     price: { type: 'number' },
-    target_center: { type: 'string' },
-    source_center: { type: 'string' },
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    typeParcelId: { type: 'string' },
+    serviceTypeId: { type: 'string' },
+    source_centerId: { type: 'string' },
+    center_targect: { type: 'string' },
   },
   example: {
     _id: '5ebac534954b54139806c112',
     // property example
-    receive: {
-      // property example receive
-      contact: '0945454545',
+    price: 100,
 
-      fullName: 'adel',
-    },
+    typeParcelId: '24',
 
-    descrtion: 'desction',
+    serviceTypeId: '3456789098764',
 
-    serviceTypeId: '673c40cd59e293827f79e398',
+    source_centerId: '45678987654',
 
-    status: ['Received'],
-
-    payment_method: 'cash',
-
-    price: 155,
-
-    target_centerId: '673c40cd59e293827f79e398',
-
-    source_centerId: '673c40cd59e293827f79e398',
-
-    userId: '673c40cd59e293827f79e398',
-
-    typeparcelId: '673c40cd59e293827f79e398',
+    center_targect: '34567898765432',
 
     createdAt: '2024-11-24T16:35:04.438Z',
     updatedAt: '2024-11-24T16:35:04.438Z',
   },
 };
-exports.createParcel = {
+exports.createSetting = {
   type: 'object',
   properties: {
     // create property
-    receive: {
-      type: 'object',
-      properties: {
-        //  create  properties receive
-        contact: { type: 'string' },
-
-        fullName: { type: 'string' },
-      },
-    },
-    descrtion: { type: 'string' },
-    serviceType: { type: 'string' },
-
-    target_center: { type: 'string' },
-
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    price: { type: 'number' },
+    typeParcelId: { type: 'string' },
+    serviceTypeId: { type: 'string' },
+    source_centerId: { type: 'string' },
+    center_targect: { type: 'string' },
   },
   example: {
     // create property example
-    receive: {
-      // create property example receive
-      contact: '0945454545',
+    price: 100,
 
-      fullName: 'adel',
-    },
+    typeParcelId: '24',
 
-    descrtion: 'desction',
+    serviceTypeId: '3456789098764',
 
-    serviceTypeId: '673c40cd59e293827f79e398',
+    source_centerId: '45678987654',
 
-    target_centerId: '673c40cd59e293827f79e398',
-
-    userId: '673c40cd59e293827f79e398',
-
-    typeparcelId: '673c40cd59e293827f79e398',
+    target_centerId: '34567898765432',
   },
   required: [
     // required property
-
-    'receive.fullName',
-
-    'descrtion',
-
-    'serviceType',
-
     'price',
 
-    'target_center',
+    'typeParcelId',
 
-    'source_center',
+    'serviceTypeId',
 
-    'user',
+    'source_centerId',
 
-    'typeparcel',
+    'target_centerId',
   ],
 };
-exports.updateParcel = {
+exports.updateSetting = {
   type: 'object',
   properties: {
     // update property
-    receive: {
-      type: 'object',
-      properties: {
-        //  update properties receive
-        contact: { type: 'string' },
-
-        fullName: { type: 'string' },
-      },
-    },
-    descrtion: { type: 'string' },
-    serviceType: { type: 'string' },
-
-    target_center: { type: 'string' },
-
-    user: { type: 'string' },
-    typeparcel: { type: 'string' },
+    price: { type: 'number' },
+    typeParcelId: { type: 'string' },
+    serviceTypeId: { type: 'string' },
+    source_centerId: { type: 'string' },
+    target_centerId: { type: 'string' },
   },
   example: {
     // update property example
-    receive: {
-      // update property example receive
-      contact: '0945454545',
+    price: 100,
 
-      fullName: 'adel',
-    },
+    typeParcelId: '24',
 
-    descrtion: 'desction',
+    serviceTypeId: '3456789098764',
 
-    serviceTypeId: '673c40cd59e293827f79e398',
+    source_centerId: '45678987654',
 
-    target_centerId: '673c40cd59e293827f79e398',
-
-    userId: '673c40cd59e293827f79e398',
-
-    typeparcelId: '673c40cd59e293827f79e398',
+    target_centerId: '34567898765432',
   },
 };

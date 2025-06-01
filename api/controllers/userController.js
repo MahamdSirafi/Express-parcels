@@ -27,6 +27,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(
     req.body,
     //  property update
+
     'phone',
     'fullName',
     'email',
