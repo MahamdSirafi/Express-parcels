@@ -33,13 +33,7 @@ router.patch(
 );
 router.patch('/updateMe', authMiddlewers.protect, userController.updateMe);
 router
-  .route('/customers')
-  .get(
-    authMiddlewers.protect,
-    authMiddlewers.isactive,
-    authMiddlewers.restrictTo('EMP'),
-    userController.getAllCustomers, // ← فقط المستخدمين اللي role = 'USER'
-  )
+  .route('/addUser')
   .post(
     authMiddlewers.protect,
     authMiddlewers.isactive,

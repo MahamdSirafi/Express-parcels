@@ -76,21 +76,6 @@ exports.getAllUsers = factory.getAll(User);
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
 
-// For employee or Admin
-exports.createCustomer = factory.createOne(User);
-exports.getCustomer = factory.getOne(User);
-exports.getAllCustomers = factory.getAll(User, { role: 'USER' });
-exports.updateCustomer = factory.updateOne(User);
-exports.deleteCustomer = factory.deleteOne(User);
-
-
-// Admin only
-exports.createEmployee = factory.createOne(User);
-exports.getEmployee = factory.getOne(User);
-exports.getAllEmployees = factory.getAll(User, { role: 'EMP' });
-exports.updateEmployee = factory.updateOne(User);
-exports.deleteEmployee = factory.deleteOne(User);
-
 
 
 
