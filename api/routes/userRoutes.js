@@ -40,63 +40,42 @@ router
     authMiddlewers.restrictTo('EMP'),
     addVarBody('role', 'USER'),
     addVarBody('password', '123454321'),
-    userController.createCustomer,
+    userController.createUser,
   );
 
 router
-  .route('/customers/:id')
+  .route('/')
   .get(
     authMiddlewers.protect,
     authMiddlewers.isactive,
-    authMiddlewers.restrictTo('EMP', 'ADMIN'),
-    userController.getCustomer,
-  )
-  .patch(
-    authMiddlewers.protect,
-    authMiddlewers.isactive,
-    authMiddlewers.restrictTo('EMP'),
-    userController.updateCustomer,
-  )
-  .delete(
-    authMiddlewers.protect,
-    authMiddlewers.isactive,
-    authMiddlewers.restrictTo('EMP'),
-    userController.deleteCustomer,
-  );
-
-router
-  .route('/employees')
-  .get(
-    authMiddlewers.protect,
-    authMiddlewers.isactive,
-    authMiddlewers.restrictTo('ADMIN'),
-    userController.getAllEmployees,
+    authMiddlewers.restrictTo('ADMIN', 'EMP'),
+    userController.getAllUsers,
   )
   .post(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.createEmployee,
+    userController.createUser,
   );
 
 router
-  .route('/employees/:id')
+  .route('/:id')
   .get(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.getEmployee,
+    userController.getUser,
   )
   .patch(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.updateEmployee,
+    userController.updateUser,
   )
   .delete(
     authMiddlewers.protect,
     authMiddlewers.isactive,
     authMiddlewers.restrictTo('ADMIN'),
-    userController.deleteEmployee,
+    userController.deleteUser,
   );
 module.exports = router;
