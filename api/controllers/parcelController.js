@@ -8,16 +8,27 @@ const { payment_method } = require('../utils/enum');
 exports.getParcel = handlerFactory.getOne(Parcel);
 
 exports.createParcel = catchAsync(async (req, res, next) => {
-  req.body.source_centerId = req.user.centerId;
+  req.body.source_centerId = req.user.centerId.toString();
+  if (
+    !req.body.serviceTypeId ||
+    !req.body.target_centerId ||
+    !req.body.typeparcelId ||
+    !req.body.source_centerId
+  ) {
+    return next(AppError('يوجد حقل مفقود بالطلب', 400));
+  }
   const setting = await Setting.findOne({
     serviceTypeId: req.body.serviceTypeId,
     target_centerId: req.body.target_centerId,
-    typeparcelId: req.body.typeparcelId,
-    source_centerId: req.user.centerId,
+    typeParcelId: req.body.typeparcelId,
+    source_centerId: req.body.source_centerId,
   });
-  // req.body.price = 8 + Math.random() * 200; //طلب خدمة خارجية لحساب السعر والمدة
-
-  req.body.price = setting.price;
+  if (!setting) {
+    console.log(
+      'لقد تم توليد السعر عشوائي بسبب ادخال معرفات غير صالحة او لم يتم ايجاد سعر بالائحة الاسعار',
+    );
+  }
+  req.body.price = setting ? setting.price : 8 + Math.random() * 200;
   const doc = await Parcel.create(req.body);
   await storageOperationsModel.create({
     parcelId: doc._id,
