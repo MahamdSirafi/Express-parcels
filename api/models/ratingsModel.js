@@ -26,13 +26,13 @@ const ratingsSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false },
 );
 // <creating-function-schema />
-ratingsSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'userId',
-    select: '-_id',
-  });
-  next();
-});
+// ratingsSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'userId',
+//     select: '-_id',
+//   });
+//   next();
+// });
 ratingsSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'parcelId',

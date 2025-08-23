@@ -27,12 +27,15 @@ storageOperationsSchema.pre(/^find/, function (next) {
   });
   next();
 });
-storageOperationsSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'centerId',
-    select: '-_id',
-  });
-  next();
-});
-const storageOperations = mongoose.model('StorageOperations', storageOperationsSchema);
+// storageOperationsSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'centerId',
+//     select: '-_id',
+//   });
+//   next();
+// });
+const storageOperations = mongoose.model(
+  'StorageOperations',
+  storageOperationsSchema,
+);
 module.exports = storageOperations;

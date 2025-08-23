@@ -10,7 +10,7 @@ router
   .post(restrictTo(ADMIN), settingController.generatePrices)
 router
   .route('/')
-  .get(restrictTo(ADMIN), settingController.getAllSetting)
+  .get(restrictTo(ADMIN ,EMP), settingController.getAllSetting)
   .post(restrictTo(ADMIN), settingController.createSetting);
 router
   .route('/:id')
