@@ -104,30 +104,41 @@ class APIFeatures {
         /(\[[a-zA-Z,]+\]|[a-zA-z.]+)/g,
         (match) => `"${match}"`,
       );
+
       let objAgg = {};
-      // console.log(this.queryString.aggDate);
       Object.assign(objAgg, JSON.parse(this.queryString.aggDate));
-      // console.log(objAgg);
-      // console.log(objAgg.group);
+
+      // معالجة الـ group
       let group = [...objAgg.group];
       group.pop();
       group.shift();
       group = group.join('').split(',');
-      // console.log(typeof group, group);
-      group.forEach((item, index) => {
-        group[index] = `$${item}`;
-      });
-      let maxyear = objAgg.year || 3000;
-      let minyear = objAgg.year || 1970;
+      group = group.map((item) => `$${item}`);
+
+      // حدود السنوات
+      let maxyear = objAgg.maxyear || 3000;
+      let minyear = objAgg.minyear || 1970;
+
+      // بناء شروط الـ match (مرنة)
+      let matchCond = {
+        year: { $gte: minyear, $lte: maxyear },
+      };
+
+      // لو فيه شرط إضافي مثل status
+      if (objAgg.filter) {
+        Object.assign(matchCond, objAgg.filter);
+      }
+
       let data = {
         group: group[0],
         max: objAgg.max,
         min: objAgg.min,
         avg: objAgg.avg,
         sum: objAgg.sum,
-        minyear: minyear,
-        maxyear: maxyear,
+        match: matchCond,
       };
+
+      // تحديد نوع التجميع
       switch (objAgg.date) {
         case 'date': {
           this.query = this.aggregate(data, '$date');
@@ -155,6 +166,7 @@ class APIFeatures {
     }
     return this;
   }
+
   aggregate(data, objId) {
     return this.query.aggregate([
       {
@@ -169,12 +181,11 @@ class APIFeatures {
           [data.min]: 1,
           [data.avg]: 1,
           [data.sum]: 1,
+          status: 1, // ضروري نمرره علشان يقدر يفلتر عليه
         },
       },
       {
-        $match: {
-          year: { $gte: data.minyear, $lte: data.maxyear },
-        },
+        $match: data.match,
       },
       {
         $group: {

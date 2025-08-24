@@ -14,6 +14,7 @@ router.get('/resetPassword/:token', (req, res) => {
 });
 router.post('/signup', authController.signup);
 router.patch('/activeMe', authMiddlewers.protect, userController.activeMe);
+router.delete('/deleteMe', authMiddlewers.protect, userController.deleteMe);
 router.patch(
   '/updateMyPassword',
   authMiddlewers.protect,
