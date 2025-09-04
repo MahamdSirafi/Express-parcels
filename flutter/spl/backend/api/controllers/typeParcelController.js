@@ -1,0 +1,9 @@
+const TypeParcel = require('../models/typeParcelModel');
+const AppError = require('../utils/appError');
+const handlerFactory = require('../utils/handlerFactory');
+const catchAsync = require('../utils/catchAsync');
+exports.getTypeParcel = handlerFactory.getOne(TypeParcel);
+exports.createTypeParcel = handlerFactory.createOne(TypeParcel);
+exports.updateTypeParcel = handlerFactory.updateOne(TypeParcel);
+exports.deleteTypeParcel = handlerFactory.deleteOne(TypeParcel);
+exports.getAllTypeParcel = handlerFactory.getAll(TypeParcel);

@@ -1,0 +1,9 @@
+const Ratings = require('../models/ratingsModel');
+const AppError = require('../utils/appError');
+const handlerFactory = require('../utils/handlerFactory');
+const catchAsync = require('../utils/catchAsync');
+exports.getRatings = handlerFactory.getOne(Ratings);
+exports.createRatings = handlerFactory.createOne(Ratings);
+exports.updateRatings = handlerFactory.updateOne(Ratings);
+exports.deleteRatings = handlerFactory.deleteOne(Ratings);
+exports.getAllRatings = handlerFactory.getAll(Ratings);
