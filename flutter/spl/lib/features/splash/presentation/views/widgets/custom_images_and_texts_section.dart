@@ -9,19 +9,25 @@ class CustomImagesAndTextsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CustomTruckAndBackgroundImage(),
-        const TextBold20Component(
-          text: 'Welcome to',
-          color: StyleToColors.greyColor,
-        ),
-        Assets.images.expressSyriaImage.image(),
-        const TextBold20Component(
-          text: 'track your shipment step by step',
-          color: StyleToColors.greyColor,
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const CustomTruckAndBackgroundImage(),
+          const TextBold20Component(
+            text: 'Welcome to',
+            color: StyleToColors.greyColor,
+          ),
+          Assets.images.expressSyriaImage.image(
+            height: 150,
+            width: double.infinity,
+            fit: BoxFit.fill,
+          ),
+          const TextBold20Component(
+            text: 'track your shipment step by step',
+            color: StyleToColors.greyColor,
+          ),
+        ],
+      ),
     );
   }
 }
