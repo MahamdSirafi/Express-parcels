@@ -81,9 +81,9 @@ class $AssetsImagesGen {
   AssetGenImage get emailImage =>
       const AssetGenImage('assets/images/email_image.png');
 
-  /// File path: assets/images/express_syria_image.png
+  /// File path: assets/images/express_syria_image.jpg
   AssetGenImage get expressSyriaImage =>
-      const AssetGenImage('assets/images/express_syria_image.png');
+      const AssetGenImage('assets/images/express_syria_image.jpg');
 
   /// File path: assets/images/green_check_image.png
   AssetGenImage get greenCheckImage =>
