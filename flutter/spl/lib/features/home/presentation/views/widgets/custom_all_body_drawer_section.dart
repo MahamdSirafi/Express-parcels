@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
+import 'package:spl/core/utils/components/left_padding_component.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/push_go_router_helper.dart';
 import 'package:spl/core/utils/helpers/show_snack_bar_without_action_helper.dart';
@@ -7,15 +10,23 @@ import 'package:spl/core/utils/styles/style_to_colors.dart';
 import 'package:spl/features/home/presentation/views/widgets/custom_body_drawer.dart';
 import 'package:spl/generator/assets.gen.dart';
 
-class CustomAllBodyDrawerSection extends StatelessWidget {
+class CustomAllBodyDrawerSection extends StatefulWidget {
   const CustomAllBodyDrawerSection({super.key});
 
+  @override
+  State<CustomAllBodyDrawerSection> createState() =>
+      _CustomAllBodyDrawerSectionState();
+}
+
+class _CustomAllBodyDrawerSectionState
+    extends State<CustomAllBodyDrawerSection> {
+  bool? isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CustomBodyDrawer(
-          text: 'About Our App',
+          text: isSelected == true ? 'حول تطبيقنا' : 'About Our App',
           onPressed: () {
             showSnackBarWithoutActionHelper(
               context: context,
@@ -28,7 +39,7 @@ class CustomAllBodyDrawerSection extends StatelessWidget {
         ),
         SizedBoxHeight.height23(context: context),
         CustomBodyDrawer(
-          text: 'Privacy Policy',
+          text: isSelected == true ? 'سياسة الخصوصية' : 'Privacy Policy',
           onPressed: () {
             pushGoRouterHelper(
               context: context,
@@ -37,22 +48,33 @@ class CustomAllBodyDrawerSection extends StatelessWidget {
           },
           image: Assets.images.privacyPolicyImage.path,
         ),
-        SizedBoxHeight.height23(context: context),
-        // LeftPaddingComponent(
-        //   leftPercent: 0.015,
-        //   child: CustomBodyDrawer(
-        //     text: 'Language',
-        //     onPressed: () {},
-        //     image: Assets.images.languagesImage.path,
-        //   ),
-        // ),
-        // SizedBoxHeight.height23(context: context),
         CustomBodyDrawer(
-          text: 'My Parcels',
+          text: isSelected == true ? 'طرودي' : 'My Parcels',
           onPressed: () {
             pushGoRouterHelper(context: context, view: kMyShipmentViewRouter);
           },
           image: Assets.images.myParcelImage.path,
+        ),
+        SizedBoxHeight.height23(context: context),
+        LeftPaddingComponent(
+          leftPercent: 0.015,
+          child: CustomBodyDrawer(
+            text: isSelected == true ? 'لغة' : 'Language',
+            onPressed: () {},
+            image: Assets.images.languagesImage.path,
+            isNeedToRightWidget: true,
+            rightWidget: FlutterSwitch(
+              value: isSelected!,
+              onToggle: (value) async {
+                isSelected = value;
+                await BoolSharedPreferencesClass.saveBoolParameterSharedPreferences(
+                  keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+                  parameterBool: isSelected!,
+                );
+                setState(() {});
+              },
+            ),
+          ),
         ),
       ],
     );

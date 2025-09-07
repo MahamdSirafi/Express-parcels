@@ -10,8 +10,12 @@ class CustomBodyDrawer extends StatelessWidget {
     required this.text,
     required this.image,
     required this.onPressed,
+    this.rightWidget,
+    this.isNeedToRightWidget = false,
   });
   final String text, image;
+  final Widget? rightWidget;
+  final bool? isNeedToRightWidget;
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,12 @@ class CustomBodyDrawer extends StatelessWidget {
             ).copyWith(color: StyleToColors.blackColor),
           ),
           SizedBoxWidth.widthExpanded,
-          Transform.rotate(
-            angle: -3.14159265,
-            child: const Icon(Icons.arrow_back_ios),
-          ),
+          isNeedToRightWidget == false
+              ? Transform.rotate(
+                angle: -3.14159265,
+                child: const Icon(Icons.arrow_back_ios),
+              )
+              : rightWidget!,
         ],
       ),
     );

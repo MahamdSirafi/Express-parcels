@@ -36,6 +36,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_polyline_points: ^2.1.0
   flutter_svg: ^2.1.0
+  flutter_switch: ^0.3.2
   get_it: ^8.0.3
   go_router: ^15.1.1
   google_maps_flutter: ^2.12.1

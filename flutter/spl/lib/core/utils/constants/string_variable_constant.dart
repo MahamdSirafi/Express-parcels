@@ -40,6 +40,8 @@ const String kStringKeyTokenInSharedPreferences = 'token';
 
 const String kStringKeyIdInSharedPreferences = 'id';
 
+const String kStringKeyFlutterSwitchInSharedPreferences = 'isSelected';
+
 const String kIntKeyInSharedPreferences = 'rate';
 
 const String kParcelId = '6818e4aad7e0b9311fe32fd8';
