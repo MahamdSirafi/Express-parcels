@@ -24,8 +24,9 @@ class SendRatingsServices {
           //handler: contain on(next(it's mean send this request), reject(it's mean cancel this request with an error), resolve(it's mean return fake response))
           final token =
               await StringsSharedPreferencesClass.getTokenMethodSharedPreferences(
-                stringKey: kStringKeyInSharedPreferences,
+                stringKey: kStringKeyTokenInSharedPreferences,
               );
+
           if (token != null && token.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer $token';
             //i told that options contain on full request and i edit on request(from add Bearer token to header if there is a token)

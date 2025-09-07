@@ -13,7 +13,7 @@ class HelpAndFaqsRepositoryImplementation implements HelpAndFaqsRepository {
   deleteAccountHelpAndFaqsRepository() async {
     final token =
         await StringsSharedPreferencesClass.getTokenMethodSharedPreferences(
-          stringKey: kStringKeyInSharedPreferences,
+          stringKey: kStringKeyTokenInSharedPreferences,
         );
     if (token == null) {
       return Left(
@@ -25,7 +25,7 @@ class HelpAndFaqsRepositoryImplementation implements HelpAndFaqsRepository {
     );
     return result.fold((failure) => Left(failure), (delete) async {
       await StringsSharedPreferencesClass.clearTokenMethodSharedPreferences(
-        stringKey: kStringKeyInSharedPreferences,
+        stringKey: kStringKeyTokenInSharedPreferences,
       );
       return const Right({'message': 'successful, the account was deleted'});
     });

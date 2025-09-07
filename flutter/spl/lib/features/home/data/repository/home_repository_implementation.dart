@@ -29,7 +29,7 @@ class HomeRepositoryImplementation implements HomeRepository {
     );
     return result.fold((failure) => Left(failure), (logout) async {
       await StringsSharedPreferencesClass.clearTokenMethodSharedPreferences(
-        stringKey: kStringKeyInSharedPreferences,
+        stringKey: kStringKeyTokenInSharedPreferences,
       );
       return Right(logout.data);
     });

@@ -36,7 +36,9 @@ const String kTruckMarkedId = 'truck';
 
 const String kBaseUrl = 'https://express-parcels.vercel.app/api/v1.0.0';
 
-const String kStringKeyInSharedPreferences = 'token';
+const String kStringKeyTokenInSharedPreferences = 'token';
+
+const String kStringKeyIdInSharedPreferences = 'id';
 
 const String kIntKeyInSharedPreferences = 'rate';
 

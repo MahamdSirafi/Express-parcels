@@ -53,7 +53,8 @@ class AuthRepositoryImplementation implements AuthRepository {
     return result.fold((failure) => Left(failure), (auth) async {
       final token = auth.data['token'];
       //token in ForgetPassword and in ResetPassword it's temporary and will be invalid, but there is token in login endpoint it's permanently for all app so i need to store this token
-      if (token == null) {
+      final id = auth.data['user']['_id'];
+      if (token == null || id == null) {
         return Left(
           ErrorServer(
             errorMessageInFailuresClass:
@@ -63,8 +64,12 @@ class AuthRepositoryImplementation implements AuthRepository {
       }
       await StringsSharedPreferencesClass.saveTokenMethodSharedPreferences(
         stringParameter: token,
-        stringKey: kStringKeyInSharedPreferences,
+        stringKey: kStringKeyTokenInSharedPreferences,
       ); //i store token in SharedPreferences so you can use it in any place
+      await StringsSharedPreferencesClass.saveTokenMethodSharedPreferences(
+        stringParameter: id,
+        stringKey: kStringKeyIdInSharedPreferences,
+      );
       return Right(auth.data);
     });
   }

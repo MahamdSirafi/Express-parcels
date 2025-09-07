@@ -24,7 +24,7 @@ class ServiceCentersServices {
           //handler: contain on(next(it's mean send this request), reject(it's mean cancel this request with an error), resolve(it's mean return fake response))
           final token =
               await StringsSharedPreferencesClass.getTokenMethodSharedPreferences(
-                stringKey: kStringKeyInSharedPreferences,
+                stringKey: kStringKeyTokenInSharedPreferences,
               );
           if (token != null && token.isNotEmpty) {
             options.headers['Authorization'] = 'Bearer $token';
