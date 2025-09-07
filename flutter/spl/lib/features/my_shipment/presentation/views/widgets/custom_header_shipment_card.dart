@@ -7,16 +7,13 @@ import 'package:spl/features/my_shipment/presentation/views/widgets/custom_rate_
 import 'package:spl/core/utils/components/text_normal_10_component.dart';
 
 class CustomHeaderShipmentCard extends StatelessWidget {
-  const CustomHeaderShipmentCard({super.key});
-
+  const CustomHeaderShipmentCard({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const TextMedium14Component(
-          text: 'Clothes',
-          color: StyleToColors.blackColor,
-        ),
+        TextMedium14Component(text: title, color: StyleToColors.blackColor),
         SizedBoxWidth.widthExpanded,
         CustomTextButtonMyShipment(),
         SizedBoxWidth.width13(context: context),

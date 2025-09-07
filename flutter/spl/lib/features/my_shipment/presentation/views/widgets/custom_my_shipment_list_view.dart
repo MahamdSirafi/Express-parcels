@@ -10,8 +10,21 @@ class CustomMyShipmentListView extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       itemCount: 10,
       itemBuilder: (context, index) {
-        return CustomMyShipmentCard();
+        return CustomMyShipmentCard(title: products[index]);
       },
     );
   }
 }
+
+List<String> products = [
+  'Laptop',
+  'Smartphone',
+  'Tablet',
+  'Headphones',
+  'Smartwatch',
+  'Keyboard',
+  'Mouse',
+  'Monitor',
+  'Printer',
+  'External Hard Drive',
+];

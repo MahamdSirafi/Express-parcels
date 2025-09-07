@@ -3,10 +3,12 @@ import 'package:spl/features/my_shipment/presentation/views/widgets/custom_backg
 import 'package:spl/features/my_shipment/presentation/views/widgets/custom_contain_my_shipment_card.dart';
 
 class CustomMyShipmentCard extends StatelessWidget {
-  const CustomMyShipmentCard({super.key});
-
+  const CustomMyShipmentCard({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
-    return CustomBackgroundShipmentCard(child: CustomContainMyShipmentCard());
+    return CustomBackgroundShipmentCard(
+      child: CustomContainMyShipmentCard(title: title),
+    );
   }
 }
