@@ -1,23 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
+import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/show_snack_bar_with_action_helper.dart';
 import 'package:spl/core/utils/styles/style_to_colors.dart';
 import 'package:spl/features/profile/presentation/managers/cubits/edit_profile_image_cubit/edit_profile_image_cubit.dart';
 import 'package:spl/features/profile/presentation/managers/cubits/edit_profile_image_cubit/edit_profile_image_state.dart';
 import 'package:spl/generator/assets.gen.dart';
 
-class CustomImagePersonProfile extends StatelessWidget {
+class CustomImagePersonProfile extends StatefulWidget {
   const CustomImagePersonProfile({super.key});
+
+  @override
+  State<CustomImagePersonProfile> createState() =>
+      _CustomImagePersonProfileState();
+}
+
+class _CustomImagePersonProfileState extends State<CustomImagePersonProfile> {
+  bool? isSelected = false;
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
+    getOnBoolValueFromSharedPreferences();
     return BlocConsumer<EditProfileImageCubit, EditProfileImageState>(
       listener: (context, state) {
         if (state is SuccessEditProfileImageState) {
           showSnackBarWithActionHelper(
             context: context,
-            text: 'Your image is added',
+            text:
+                isSelected == true ? 'تمت إضافة صورتك' : 'Your image is added',
             color: StyleToColors.greenColor,
           );
         } else if (state is FailureEditProfileImageState) {

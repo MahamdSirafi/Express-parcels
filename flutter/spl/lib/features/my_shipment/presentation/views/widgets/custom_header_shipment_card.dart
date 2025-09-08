@@ -25,6 +25,7 @@ class _CustomHeaderShipmentCardState extends State<CustomHeaderShipmentCard> {
         await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
           keyBool: kStringKeyFlutterSwitchInSharedPreferences,
         );
+    if (!mounted) return;
     setState(() {});
   }
 

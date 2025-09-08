@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
+import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/change_string_to_date_time_type_helper.dart';
 import 'package:spl/core/utils/sizes/sized_box/sized_box_height.dart';
 import 'package:spl/features/packages/presentation/managers/models/package_type_model.dart';
@@ -8,7 +9,7 @@ import 'package:spl/features/packages/presentation/views/widgets/custom_size_pac
 import 'package:spl/features/packages/presentation/views/widgets/custom_text_explain_about_package_type.dart';
 import 'package:spl/core/utils/components/price_texts_package_type_component.dart';
 
-class CustomLeftSideContainPackageType extends StatelessWidget {
+class CustomLeftSideContainPackageType extends StatefulWidget {
   const CustomLeftSideContainPackageType({
     super.key,
     required this.packageTypeList,
@@ -16,33 +17,55 @@ class CustomLeftSideContainPackageType extends StatelessWidget {
   });
   final List<PackageTypeModel> packageTypeList;
   final int index;
+
+  @override
+  State<CustomLeftSideContainPackageType> createState() =>
+      _CustomLeftSideContainPackageTypeState();
+}
+
+class _CustomLeftSideContainPackageTypeState
+    extends State<CustomLeftSideContainPackageType> {
+  bool? isSelected = false;
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    getOnBoolValueFromSharedPreferences();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBoxHeight.height10(context: context),
-        CustomSizePackageLeftSide(name: packageTypeList[index].name),
+        CustomSizePackageLeftSide(
+          name: widget.packageTypeList[widget.index].name,
+        ),
         SizedBoxHeight.height5(context: context),
         CustomImageWithTwoTextsLeftSide(
-          firstText: 'Creation date',
+          firstText: isSelected == true ? 'تاريخ الإنشاء' : 'Creation date',
           secondText: changeStringToDateTimeTypeHelper(
-            text: packageTypeList[index].createdAt,
+            text: widget.packageTypeList[widget.index].createdAt,
           ),
           svgOrPngImage: 'svg',
         ),
         SizedBoxHeight.height5(context: context),
-        PriceTextsPackageTypeComponent(price: packageTypeList[index].price),
+        PriceTextsPackageTypeComponent(
+          price: widget.packageTypeList[widget.index].price,
+        ),
         SizedBoxHeight.height5(context: context),
         CustomImageWithTwoTextsLeftSide(
-          firstText: 'Size:',
+          firstText: isSelected == true ? 'مقاس:' : 'Size:',
           secondText:
-              '${packageTypeList[index].width}x${packageTypeList[index].height} cm',
+              '${widget.packageTypeList[widget.index].width}x${widget.packageTypeList[widget.index].height} cm',
           svgOrPngImage: 'png',
         ),
         SizedBoxHeight.height5(context: context),
         CustomTextExplainAboutPackageType(
-          description: packageTypeList[index].description,
+          description: widget.packageTypeList[widget.index].description,
         ),
       ],
     );

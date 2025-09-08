@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/components/back_arrow_with_text_component.dart';
+import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/pop_go_router_helper.dart';
 import 'package:spl/core/utils/helpers/show_snack_bar_with_action_helper.dart';
 import 'package:spl/core/utils/sizes/sized_box/sized_box_height.dart';
@@ -32,8 +34,18 @@ class _CustomEditProfileButtonViewBodyState
     super.dispose();
   }
 
+  bool? isSelected = false;
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    getOnBoolValueFromSharedPreferences();
     return CustomScrollView(
       slivers: [
         SliverFillRemaining(
@@ -44,7 +56,10 @@ class _CustomEditProfileButtonViewBodyState
                 popGoRouterHelper(context: context);
                 showSnackBarWithActionHelper(
                   context: context,
-                  text: 'your profile is successful edited',
+                  text:
+                      isSelected == true
+                          ? 'تم تعديل ملفك الشخصي بنجاح'
+                          : 'your profile is successful edited',
                   color: StyleToColors.greenColor,
                 );
               } else if (state is FailureEditProfileState) {
@@ -63,7 +78,12 @@ class _CustomEditProfileButtonViewBodyState
                 child: Column(
                   children: [
                     SizedBoxHeight.height33(context: context),
-                    const BackArrowWithTextComponent(text: 'Edit profile'),
+                    BackArrowWithTextComponent(
+                      text:
+                          isSelected == true
+                              ? 'تعديل الملف الشخصي'
+                              : 'Edit profile',
+                    ),
                     SizedBoxHeight.height40(context: context),
                     CustomBackgroundAndTextFormFieldsEditProfileSection(
                       fullNameTextEditingController:

@@ -18,16 +18,10 @@ class _CustomMyShipmentListViewState extends State<CustomMyShipmentListView> {
     'Tablet',
     'Headphones',
     'Smartwatch',
-    'Keyboard',
-    'Mouse',
-    'Monitor',
-    'Printer',
-    'External Hard Drive',
   ];
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      physics: const BouncingScrollPhysics(),
       itemCount: productsMyShipmentList.length,
       itemBuilder: (context, index) {
         return CustomMyShipmentCard(
