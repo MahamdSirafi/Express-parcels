@@ -32,7 +32,9 @@ class _CustomAllBodyDrawerSectionState
               context: context,
               color: StyleToColors.greenColor,
               text:
-                  'The SPL app is a modern Flutter-based solution for managing and transitioning products efficiently, It provides a smooth user experience with clean UI, real-time updates, and secure data handling. Designed for businesses handling product logistics, the app simplifies product tracking, categorization, and movement across different stages of transition.',
+                  isSelected == true
+                      ? 'تطبيق SPL هو حل حديث قائم على Flutter لإدارة المنتجات ونقلها بكفاءة. يوفر تجربة مستخدم سلسة مع واجهة مستخدم أنيقة، وتحديثات فورية، ومعالجة آمنة للبيانات. صُمم التطبيق للشركات التي تُعنى بلوجستيات المنتجات، ويُبسط تتبع المنتجات وتصنيفها وتنقلها عبر مراحل مختلفة من عملية النقل.'
+                      : 'The SPL app is a modern Flutter-based solution for managing and transitioning products efficiently, It provides a smooth user experience with clean UI, real-time updates, and secure data handling. Designed for businesses handling product logistics, the app simplifies product tracking, categorization, and movement across different stages of transition.',
             );
           },
           image: Assets.images.aboutOurAppImage.path,

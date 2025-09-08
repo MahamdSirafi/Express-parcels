@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/pop_go_router_helper.dart';
 import 'package:spl/core/utils/helpers/push_go_router_helper.dart';
@@ -26,6 +27,7 @@ class _CustomTextFormFieldAndCardAndTextButtonSectionState
     extends State<CustomTextFormFieldAndCardAndTextButtonSection> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController emailTextEditingController;
+  bool? isSelected = false;
   @override
   void initState() {
     super.initState();
@@ -38,9 +40,18 @@ class _CustomTextFormFieldAndCardAndTextButtonSectionState
     emailTextEditingController.dispose();
   }
 
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
+    getOnBoolValueFromSharedPreferences();
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is FailureAuthState) {
@@ -59,13 +70,19 @@ class _CustomTextFormFieldAndCardAndTextButtonSectionState
             );
             showSnackBarWithActionHelper(
               context: context,
-              text: 'Password Reset Email Sent',
+              text:
+                  isSelected == true
+                      ? 'تم إرسال بريد إلكتروني لإعادة تعيين كلمة المرور'
+                      : 'Password Reset Email Sent',
               color: StyleToColors.greenColor,
             );
           } else {
             showSnackBarWithActionHelper(
               context: context,
-              text: 'No token received for yet',
+              text:
+                  isSelected == true
+                      ? 'لم يتم استلام الرمز حتى الآن'
+                      : 'No token received for yet',
             );
           }
         }
@@ -82,16 +99,26 @@ class _CustomTextFormFieldAndCardAndTextButtonSectionState
                 padding: EdgeInsets.symmetric(horizontal: width * 0.035),
                 child:
                     TextFormFieldWithPrefixAndSuffixIconsAndHintAndUpTextComponent(
-                      text: 'Email Address',
+                      text:
+                          isSelected == true
+                              ? 'عنوان البريد الإلكتروني'
+                              : 'Email Address',
                       textEditingController: emailTextEditingController,
                       keyboardType: TextInputType.emailAddress,
-                      hintText: 'example@gmail.com',
+                      hintText:
+                          isSelected == true
+                              ? 'مثال@gmail.com'
+                              : 'example@gmail.com',
                       prefixIcon: Assets.images.emailImage.path,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'The email field\'s required';
+                          return isSelected == true
+                              ? 'حقل البريد الإلكتروني مطلوب'
+                              : 'The email field\'s required';
                         } else if (!value.contains('@gmail.com')) {
-                          return 'You must add @gmail.com';
+                          return isSelected == true
+                              ? 'يجب عليك إضافة @gmail.com'
+                              : 'You must add @gmail.com';
                         }
                         return null;
                       },
@@ -99,7 +126,10 @@ class _CustomTextFormFieldAndCardAndTextButtonSectionState
               ),
               SizedBoxHeight.height35(context: context),
               CardContainOnTextComponent(
-                text: 'Reset Password',
+                text:
+                    isSelected == true
+                        ? 'إعادة تعيين كلمة المرور'
+                        : 'Reset Password',
                 onTap: () async {
                   if (formKey.currentState!.validate()) {
                     await context.read<AuthCubit>().forgetPasswordMethodInCubit(
@@ -110,7 +140,10 @@ class _CustomTextFormFieldAndCardAndTextButtonSectionState
               ),
               SizedBoxHeight.height8(context: context),
               TextButtonWithJustText(
-                text: 'Back to Login',
+                text:
+                    isSelected == true
+                        ? 'العودة إلى تسجيل الدخول'
+                        : 'Back to Login',
                 onPressed: () {
                   popGoRouterHelper(context: context);
                 },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/assign_data_to_int_parameter_in_future_helper.dart';
 import 'package:spl/core/utils/helpers/pop_go_router_helper.dart';
@@ -33,14 +34,27 @@ class _CustomContainRateShipmentDialogState
     super.dispose();
   }
 
+  bool? isSelected = false;
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    getOnBoolValueFromSharedPreferences();
     return BlocConsumer<SendRatingsCubit, SendRatingsState>(
       listener: (context, state) {
         if (state is SendRatingsSuccessState) {
           showSnackBarWithoutActionHelper(
             context: context,
-            text: 'your rating are submitting successful',
+            text:
+                isSelected == true
+                    ? 'تم إرسال تقييمك بنجاح'
+                    : 'your rating are submitting successful',
             color: StyleToColors.greenColor,
           );
           popGoRouterHelper(context: context);
@@ -62,7 +76,10 @@ class _CustomContainRateShipmentDialogState
             SizedBoxHeight.height10(context: context),
             const CustomHeaderRateShipmentDialog(),
             const CustomStarRatingShipmentDialog(),
-            const TextBold14Component(text: 'Comments', percent: 0.065),
+            TextBold14Component(
+              text: isSelected == true ? 'تعليقات' : 'Comments',
+              percent: 0.065,
+            ),
             SizedBoxHeight.height10(context: context),
             CustomTextFieldRateShipmentDialog(
               textEditingController: textEditingController,
@@ -74,7 +91,10 @@ class _CustomContainRateShipmentDialogState
                 if (ratings == 0 && textEditingController.text.isEmpty) {
                   showSnackBarWithoutActionHelper(
                     context: context,
-                    text: 'Please select a rating and write comment',
+                    text:
+                        isSelected == true
+                            ? 'الرجاء اختيار التقييم وكتابة التعليق'
+                            : 'Please select a rating and write comment',
                   );
                   return;
                 }

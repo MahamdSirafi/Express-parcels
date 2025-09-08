@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/push_go_router_helper.dart';
 import 'package:spl/core/utils/components/card_contain_on_text_component.dart';
@@ -39,9 +40,19 @@ class _CustomTextFormFieldsAndCardResetPasswordSectionState
     newPasswordAndConfirmPasswordTextEditingController.dispose();
   }
 
+  bool? isSelected = false;
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
+    getOnBoolValueFromSharedPreferences();
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is FailureAuthState) {
@@ -56,7 +67,10 @@ class _CustomTextFormFieldsAndCardResetPasswordSectionState
           );
           showSnackBarWithoutActionHelper(
             context: context,
-            text: 'Password Reset Successful',
+            text:
+                isSelected == true
+                    ? 'تمت إعادة تعيين كلمة المرور بنجاح'
+                    : 'Password Reset Successful',
             color: StyleToColors.greenColor,
           );
         }
@@ -70,23 +84,36 @@ class _CustomTextFormFieldsAndCardResetPasswordSectionState
           child: Column(
             children: [
               CustomTextFormFieldResetPassword(
-                hintText: 'New password',
+                hintText:
+                    isSelected == true ? 'كلمة المرور الجديدة' : 'New password',
                 textEditingController:
                     newPasswordAndConfirmPasswordTextEditingController,
-                labelText: 'Enter new password',
+                labelText:
+                    isSelected == true
+                        ? 'أدخل كلمة المرور الجديدة'
+                        : 'Enter new password',
               ),
               SizedBoxHeight.height35(context: context),
               CustomTextFormFieldResetPassword(
-                hintText: 'Confirm password',
+                hintText:
+                    isSelected == true
+                        ? 'تأكيد كلمة المرور'
+                        : 'Confirm password',
                 textEditingController:
                     newPasswordAndConfirmPasswordTextEditingController,
-                labelText: 'Confirm password',
+                labelText:
+                    isSelected == true
+                        ? 'تأكيد كلمة المرور'
+                        : 'Confirm password',
               ),
               SizedBoxHeight.height21(context: context),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.035),
                 child: CardContainOnTextComponent(
-                  text: 'Change Password',
+                  text:
+                      isSelected == true
+                          ? 'تغيير كلمة المرور'
+                          : 'Change Password',
                   onTap: () async {
                     if (formKey.currentState!.validate()) {
                       pushGoRouterHelper(

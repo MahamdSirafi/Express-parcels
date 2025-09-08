@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/components/text_bold_14_component.dart';
+import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/styles/style_to_colors.dart';
 
-class CustomSubmitShipmentButtonRateDialog extends StatelessWidget {
+class CustomSubmitShipmentButtonRateDialog extends StatefulWidget {
   const CustomSubmitShipmentButtonRateDialog({
     super.key,
     required this.onPressed,
   });
   final void Function()? onPressed;
+
+  @override
+  State<CustomSubmitShipmentButtonRateDialog> createState() =>
+      _CustomSubmitShipmentButtonRateDialogState();
+}
+
+class _CustomSubmitShipmentButtonRateDialogState
+    extends State<CustomSubmitShipmentButtonRateDialog> {
+  bool? isSelected = false;
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -25,9 +44,9 @@ class CustomSubmitShipmentButtonRateDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(size.height * 0.03),
               ),
             ),
-            onPressed: onPressed,
-            child: const TextBold14Component(
-              text: 'Submit',
+            onPressed: widget.onPressed,
+            child: TextBold14Component(
+              text: isSelected == true ? 'يُقدِّم' : 'Submit',
               color: StyleToColors.whiteColor,
             ),
           ),

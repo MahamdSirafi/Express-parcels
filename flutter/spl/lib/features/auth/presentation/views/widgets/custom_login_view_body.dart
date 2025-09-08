@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/push_go_router_helper.dart';
 import 'package:spl/core/utils/helpers/show_snack_bar_with_action_helper.dart';
@@ -23,6 +24,7 @@ class _CustomLoginViewBodyState extends State<CustomLoginViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController emailTextEditingController,
       passwordTextEditingController;
+  bool? isSelected = false;
   @override
   void initState() {
     super.initState();
@@ -37,8 +39,17 @@ class _CustomLoginViewBodyState extends State<CustomLoginViewBody> {
     passwordTextEditingController.dispose();
   }
 
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    getOnBoolValueFromSharedPreferences();
     return CustomScrollView(
       slivers: [
         SliverFillRemaining(
@@ -54,7 +65,10 @@ class _CustomLoginViewBodyState extends State<CustomLoginViewBody> {
                 pushGoRouterHelper(context: context, view: kHomeViewRouter);
                 showSnackBarWithActionHelper(
                   context: context,
-                  text: 'LogIn Successful',
+                  text:
+                      isSelected == true
+                          ? 'تم تسجيل الدخول بنجاح'
+                          : 'LogIn Successful',
                   color: StyleToColors.greenColor,
                 );
               }
@@ -76,7 +90,7 @@ class _CustomLoginViewBodyState extends State<CustomLoginViewBody> {
                     ),
                     SizedBoxHeight.heightExpanded,
                     CardContainOnTextComponent(
-                      text: 'LogIn',
+                      text: isSelected == true ? 'تسجيل الدخول' : 'LogIn',
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           await context.read<AuthCubit>().loginMethodInCubit(

@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/go_go_router_helper.dart';
 import 'package:spl/core/utils/helpers/pop_go_router_helper.dart';
@@ -11,11 +12,28 @@ import 'package:spl/core/utils/styles/style_to_colors.dart';
 import 'package:spl/core/utils/styles/style_to_texts.dart';
 import 'package:spl/features/home/presentation/views/widgets/custom_text_button_show_dialog_log_out.dart';
 
-class CustomTwoTextButtonInShowDialogLogOut extends StatelessWidget {
+class CustomTwoTextButtonInShowDialogLogOut extends StatefulWidget {
   const CustomTwoTextButtonInShowDialogLogOut({super.key});
 
   @override
+  State<CustomTwoTextButtonInShowDialogLogOut> createState() =>
+      _CustomTwoTextButtonInShowDialogLogOutState();
+}
+
+class _CustomTwoTextButtonInShowDialogLogOutState
+    extends State<CustomTwoTextButtonInShowDialogLogOut> {
+  bool? isSelected = false;
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
+    getOnBoolValueFromSharedPreferences();
     return Row(
       children: [
         BlocBuilder<LogoutCubit, LogoutState>(
@@ -24,7 +42,7 @@ class CustomTwoTextButtonInShowDialogLogOut extends StatelessWidget {
               return CustomTextButtonShowDialogLogOut(
                 backgroundColor: StyleToColors.mediumRedColor,
                 textColor: StyleToColors.mediumWhiteColor,
-                text: 'Yes',
+                text: isSelected == true ? 'نعم' : 'Yes',
                 onPressed: () async {
                   await context.read<LogoutCubit>().logoutMethodInCubit();
                   goGoRouterHelper(context: context, view: kSplashViewRouter);
@@ -46,7 +64,7 @@ class CustomTwoTextButtonInShowDialogLogOut extends StatelessWidget {
         CustomTextButtonShowDialogLogOut(
           backgroundColor: StyleToColors.greyColor,
           textColor: StyleToColors.whiteColor,
-          text: 'Cancel',
+          text: isSelected == true ? 'يلغي' : 'Cancel',
           onPressed: () {
             popGoRouterHelper(context: context);
           },

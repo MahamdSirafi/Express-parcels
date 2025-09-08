@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_class.dart';
 import 'package:spl/core/utils/components/divider_component.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
 import 'package:spl/core/utils/helpers/push_go_router_helper.dart';
@@ -25,6 +26,7 @@ class _CustomRegisterViewBodyState extends State<CustomRegisterViewBody> {
       passwordTextEditingController,
       fullNameTextEditingController,
       phoneTextEditingController;
+  bool? isSelected = false;
   @override
   void initState() {
     super.initState();
@@ -43,8 +45,17 @@ class _CustomRegisterViewBodyState extends State<CustomRegisterViewBody> {
     phoneTextEditingController.dispose();
   }
 
+  Future<void> getOnBoolValueFromSharedPreferences() async {
+    isSelected =
+        await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
+          keyBool: kStringKeyFlutterSwitchInSharedPreferences,
+        );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    getOnBoolValueFromSharedPreferences();
     return CustomScrollView(
       slivers: [
         SliverFillRemaining(
@@ -60,7 +71,10 @@ class _CustomRegisterViewBodyState extends State<CustomRegisterViewBody> {
                 pushGoRouterHelper(context: context, view: kHomeViewRouter);
                 showSnackBarWithActionHelper(
                   context: context,
-                  text: 'SignUp Successful',
+                  text:
+                      isSelected == true
+                          ? 'تم التسجيل بنجاح'
+                          : 'SignUp Successful',
                   color: StyleToColors.greenColor,
                 );
               }
@@ -86,7 +100,7 @@ class _CustomRegisterViewBodyState extends State<CustomRegisterViewBody> {
                     ),
                     SizedBoxHeight.heightExpanded,
                     CardContainOnTextComponent(
-                      text: 'Sign Up',
+                      text: isSelected == true ? 'اشتراك' : 'Sign Up',
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           await context.read<AuthCubit>().signUpMethodInCubit(
