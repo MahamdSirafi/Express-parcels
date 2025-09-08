@@ -3,6 +3,7 @@ import 'package:spl/core/utils/classes/local_database/bool_shared_preferences_cl
 import 'package:spl/core/utils/components/dot_component.dart';
 import 'package:spl/core/utils/components/text_medium_14_component.dart';
 import 'package:spl/core/utils/constants/string_variable_constant.dart';
+import 'package:spl/core/utils/helpers/show_dialog_rate_shipment_helper.dart';
 import 'package:spl/core/utils/sizes/sized_box/sized_box_width.dart';
 import 'package:spl/core/utils/styles/style_to_colors.dart';
 import 'package:spl/features/my_shipment/presentation/views/widgets/custom_rate_text_button_my_shipment.dart';
@@ -37,7 +38,12 @@ class _CustomHeaderShipmentCardState extends State<CustomHeaderShipmentCard> {
           color: StyleToColors.blackColor,
         ),
         SizedBoxWidth.widthExpanded,
-        CustomTextButtonMyShipment(),
+        CustomTextButtonMyShipment(
+          text: isSelected == true ? 'معدل' : 'Rate',
+          textColor: StyleToColors.littleNeonGreenColor,
+          borderColor: StyleToColors.littleNeonGreenColor,
+          onPressed: () => showDialogRateShipmentHelper(context: context),
+        ),
         SizedBoxWidth.width13(context: context),
         TextNormal10Component(
           text: isSelected == true ? 'تم التوصيل' : 'Delivered',

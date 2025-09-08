@@ -21,6 +21,7 @@ class _CustomTwoTextShipmentCardState extends State<CustomTwoTextShipmentCard> {
         await BoolSharedPreferencesClass.getBoolParameterSharedPreferences(
           keyBool: kStringKeyFlutterSwitchInSharedPreferences,
         );
+    if (!mounted) return;
     setState(() {});
   }
 

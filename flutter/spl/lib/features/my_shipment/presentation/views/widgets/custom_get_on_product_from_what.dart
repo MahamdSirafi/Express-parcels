@@ -30,7 +30,7 @@ class _CustomGetOnProductFromWhatState
     return Column(
       children: [
         Transform.translate(
-          offset: Offset(-size.width * 0.085, size.height * 0.02),
+          offset: Offset(-size.width * 0.04, size.height * 0.005),
           child: TextNormal10Component(
             text: isSelected == true ? 'بواسطة شاحنة' : 'by Truck',
           ),
