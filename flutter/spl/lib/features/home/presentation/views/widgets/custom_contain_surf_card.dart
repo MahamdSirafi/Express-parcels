@@ -31,7 +31,7 @@ class _CustomContainSurfCardState extends State<CustomContainSurfCard> {
       children: [
         SizedBoxWidth.widthExpanded,
         TextNormal10Component(
-          text: isSelected == true ? 'ركوب الأمواج' : 'Surf',
+          text: isSelected == true ? 'أمواج' : 'Surf',
           textColor: StyleToColors.blackColor,
         ),
         SizedBoxWidth.widthExpanded,
