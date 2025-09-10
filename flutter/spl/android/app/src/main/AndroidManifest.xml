@@ -7,7 +7,7 @@
         android:label="SPL"
         android:hardwareAccelerated="true"
         android:name="${applicationName}"
-        android:icon="@mipmap/spl_image">
+        android:icon="@mipmap/speed_shipments_image">
 
         <!-- ✅ Main activity -->
         <activity
